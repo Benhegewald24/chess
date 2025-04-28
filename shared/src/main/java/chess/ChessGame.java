@@ -1,5 +1,4 @@
 package chess;
-
 import java.util.Collection;
 
 /**
@@ -31,7 +30,8 @@ public class ChessGame
      */
     public void setTeamTurn(TeamColor team)
     {
-        throw new RuntimeException("Not implemented");
+        //should start with white and then alternates
+        team = TeamColor.WHITE;
     }
 
     /**

@@ -12,18 +12,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
+public class ChessBoardTests extends EqualsTestingUtility<ChessBoard>
+{
     public ChessBoardTests() {
         super("ChessBoard", "boards");
     }
 
     @Test
     @DisplayName("Construct Empty ChessBoard")
-    public void constructChessBoard() {
+    public void constructChessBoard()
+    {
         ChessBoard board = new ChessBoard();
 
-        for (int row = 1; row <= 8; row++) {
-            for (int col = 1; col <= 8; col++) {
+        for (int row = 1; row <= 8; row++)
+        {
+            for (int col = 1; col <= 8; col++)
+            {
                 Assertions.assertNull(
                         board.getPiece(new ChessPosition(row, col)),
                         "Immediately upon construction, a ChessBoard should be empty."
@@ -35,7 +39,8 @@ public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
 
     @Test
     @DisplayName("Add and Get Piece")
-    public void getAddPiece() {
+    public void getAddPiece()
+    {
         ChessPosition position = new ChessPosition(4, 4);
         ChessPiece piece = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
 
@@ -53,7 +58,8 @@ public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
 
     @Test
     @DisplayName("Reset Board")
-    public void defaultGameBoard() {
+    public void defaultGameBoard()
+    {
         var expectedBoard = TestUtilities.defaultBoard();
 
         var actualBoard = new ChessBoard();
@@ -63,14 +69,16 @@ public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
     }
 
     @Override
-    protected ChessBoard buildOriginal() {
+    protected ChessBoard buildOriginal()
+    {
         var basicBoard = new ChessBoard();
         basicBoard.resetBoard();
         return basicBoard;
     }
 
     @Override
-    protected Collection<ChessBoard> buildAllDifferent() {
+    protected Collection<ChessBoard> buildAllDifferent()
+    {
         List<ChessBoard> differentBoards = new ArrayList<>();
 
         differentBoards.add(new ChessBoard()); // An empty board
@@ -86,18 +94,20 @@ public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
         // The color is assigned in a mixed pattern.
         ChessPiece.PieceType type;
         boolean isWhite;
-        for (int col = 1; col <= 8; col++) {
-            for (int row = 1; row <= 8; row++) {
+        for (int col = 1; col <= 8; col++)
+        {
+            for (int row = 1; row <= 8; row++)
+            {
                 type = pieceSchedule[row-1];
                 isWhite = (row + col) % 2 == 0;
                 differentBoards.add(createBoardWithPiece(row, col, type, isWhite));
             }
         }
-
         return differentBoards;
     }
 
-    private ChessBoard createBoardWithPiece(int row, int col, ChessPiece.PieceType type, boolean isWhite) {
+    private ChessBoard createBoardWithPiece(int row, int col, ChessPiece.PieceType type, boolean isWhite)
+    {
         var board = new ChessBoard();
 
         var teamColor = isWhite ? ChessGame.TeamColor.WHITE : ChessGame.TeamColor.BLACK;
@@ -108,5 +118,4 @@ public class ChessBoardTests extends EqualsTestingUtility<ChessBoard> {
 
         return board;
     }
-
 }

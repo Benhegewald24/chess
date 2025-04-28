@@ -12,18 +12,22 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class ChessPieceTests extends EqualsTestingUtility<ChessPiece> {
-    public ChessPieceTests() {
+public class ChessPieceTests extends EqualsTestingUtility<ChessPiece>
+{
+    public ChessPieceTests()
+    {
         super("ChessPiece", "pieces");
     }
 
     @Override
-    protected ChessPiece buildOriginal() {
+    protected ChessPiece buildOriginal()
+    {
         return new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
     }
 
     @Override
-    protected Collection<ChessPiece> buildAllDifferent() {
+    protected Collection<ChessPiece> buildAllDifferent()
+    {
         return List.of(
                 new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING),
                 new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN),
@@ -36,7 +40,8 @@ public class ChessPieceTests extends EqualsTestingUtility<ChessPiece> {
 
     @Test
     @DisplayName("Piece Move on All Pieces")
-    public void pieceMoveAllPieces() {
+    public void pieceMoveAllPieces()
+    {
         var board = new ChessBoard();
 
         // 6 piece types * 2 team colors = 12 different pieces
@@ -47,12 +52,16 @@ public class ChessPieceTests extends EqualsTestingUtility<ChessPiece> {
                 .toList();
 
         // 8 rows * 8 cols * 12 pieces = 768 evaluations - 32 pawns on back rows
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
+        for (int i = 1; i <= 8; i++)
+        {
+            for (int j = 1; j <= 8; j++)
+            {
                 ChessPosition position = new ChessPosition(i, j);
 
-                for (var piece : allPossiblePieces) {
-                    if (piece.getPieceType() == ChessPiece.PieceType.PAWN && (i == 1 || i == 8)) {
+                for (var piece : allPossiblePieces)
+                {
+                    if (piece.getPieceType() == ChessPiece.PieceType.PAWN && (i == 1 || i == 8))
+                    {
                         continue;
                     }
 
@@ -67,5 +76,4 @@ public class ChessPieceTests extends EqualsTestingUtility<ChessPiece> {
             }
         }
     }
-
 }

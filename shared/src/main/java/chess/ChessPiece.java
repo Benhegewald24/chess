@@ -11,7 +11,6 @@ import java.util.Collection;
  */
 public class ChessPiece
 {
-
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type)
     {
     }
@@ -21,12 +20,7 @@ public class ChessPiece
      */
     public enum PieceType
     {
-        KING,
-        QUEEN,
-        BISHOP,
-        KNIGHT,
-        ROOK,
-        PAWN
+        KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
     }
 
     /**
@@ -34,8 +28,8 @@ public class ChessPiece
      */
     public ChessGame.TeamColor getTeamColor()
     {
-        return getTeamColor();
-        //throw new RuntimeException("Not implemented");
+        //if piece == white than it belongs to white team. if piece == black than it belongs to the black team.
+        throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -43,8 +37,8 @@ public class ChessPiece
      */
     public PieceType getPieceType()
     {
-        return getPieceType();
-        //throw new RuntimeException("Not implemented");
+        //return idk
+        throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -57,6 +51,11 @@ public class ChessPiece
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition)
     {
         //throw new RuntimeException("Not implemented");
+//        if (getPieceType() == PieceType.BISHOP)
+//        {
+//            while (col < 8 && row < 8) {}
+//        }
+
         return new ArrayList<>();
     }
 }

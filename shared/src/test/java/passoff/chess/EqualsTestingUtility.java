@@ -19,14 +19,16 @@ import java.util.Set;
  *
  * @param <T> The type to be compared during testing.
  */
-public abstract class EqualsTestingUtility<T> {
+public abstract class EqualsTestingUtility<T>
+{
     private final String className;
     private final String itemsPlural;
     private T original;
     private T equivalent;
     private Collection<T> allDifferent;
 
-    public EqualsTestingUtility(String className, String itemsPlural) {
+    public EqualsTestingUtility(String className, String itemsPlural)
+    {
         this.className = className;
         this.itemsPlural = itemsPlural;
     }
@@ -36,7 +38,8 @@ public abstract class EqualsTestingUtility<T> {
 
 
     @BeforeEach
-    public void setUp() {
+    public void setUp()
+    {
         original = buildOriginal();
         equivalent = buildOriginal(); // For a second time
         allDifferent = buildAllDifferent();
@@ -44,10 +47,12 @@ public abstract class EqualsTestingUtility<T> {
 
     @Test
     @DisplayName("Equals Testing")
-    public void equalsTest() {
+    public void equalsTest()
+    {
         Assertions.assertEquals(original, equivalent,
                 className + ".equals() returned false for equivalent " + itemsPlural);
-        for (var different : allDifferent) {
+        for (var different : allDifferent)
+        {
             Assertions.assertNotEquals(original, different,
                     className + ".equals() returned true for different " + itemsPlural);
         }
@@ -55,10 +60,12 @@ public abstract class EqualsTestingUtility<T> {
 
     @Test
     @DisplayName("HashCode Testing")
-    public void hashTest() {
+    public void hashTest()
+    {
         Assertions.assertEquals(original.hashCode(), equivalent.hashCode(),
                 className + ".hashCode() returned different values for equivalent " + itemsPlural);
-        for (var different : allDifferent) {
+        for (var different : allDifferent)
+        {
             Assertions.assertNotEquals(original.hashCode(), different.hashCode(),
                     className + ".hashCode() returned the same value for different " + itemsPlural);
         }
@@ -66,7 +73,8 @@ public abstract class EqualsTestingUtility<T> {
 
     @Test
     @DisplayName("Equals & HashCode Testing")
-    public void hashSetTest() {
+    public void hashSetTest()
+    {
         Set<T> set = new HashSet<>();
         set.add(original);
 
@@ -83,7 +91,8 @@ public abstract class EqualsTestingUtility<T> {
 
         // Programmatically test insertion of all different items
         int expectedSetSize = 1;
-        for (var different : allDifferent) {
+        for (var different : allDifferent)
+        {
             Assertions.assertFalse(set.contains(different),
                     "[" + className + "] Different item should not be present in set before insertion");
             set.add(different);
@@ -91,7 +100,5 @@ public abstract class EqualsTestingUtility<T> {
             Assertions.assertEquals(expectedSetSize, set.size(),
                     "[" + className + "] New item was counted as different during insertion");
         }
-
     }
-
 }

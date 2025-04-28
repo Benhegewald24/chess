@@ -8,8 +8,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class TestUtilities {
-    public static void validateMoves(String boardText, ChessPosition startPosition, int[][] endPositions) {
+public class TestUtilities
+{
+    public static void validateMoves(String boardText, ChessPosition startPosition, int[][] endPositions)
+    {
         var board = loadBoard(boardText);
         var testPiece = board.getPiece(startPosition);
         Assertions.assertNotNull(testPiece, "Could not find piece on board");
@@ -18,13 +20,15 @@ public class TestUtilities {
     }
 
     public static void validateMoves(ChessBoard board, ChessPiece testPiece, ChessPosition startPosition,
-                                     List<ChessMove> validMoves) {
+                                     List<ChessMove> validMoves)
+    {
         var pieceMoves = testPiece.pieceMoves(board, startPosition);
         Assertions.assertNotNull(pieceMoves, "pieceMoves returned null");
         validateMoves(validMoves, new ArrayList<>(pieceMoves));
     }
 
-    public static void validateMoves(List<ChessMove> expected, List<ChessMove> actual) {
+    public static void validateMoves(List<ChessMove> expected, List<ChessMove> actual)
+    {
         Comparator<ChessMove> comparator = Comparator.comparingInt(TestUtilities::moveToInt);
         expected.sort(comparator);
         actual.sort(comparator);
@@ -41,20 +45,26 @@ public class TestUtilities {
             'k', ChessPiece.PieceType.KING,
             'b', ChessPiece.PieceType.BISHOP);
 
-    public static ChessBoard loadBoard(String boardText) {
+    public static ChessBoard loadBoard(String boardText)
+    {
         var board = new ChessBoard();
         int row = 8;
         int column = 1;
-        for (var c : boardText.toCharArray()) {
-            switch (c) {
-                case '\n' -> {
+        for (var c : boardText.toCharArray())
+        {
+            switch (c)
+            {
+                case '\n' ->
+                {
                     column = 1;
                     row--;
                 }
                 case ' ' -> column++;
-                case '|' -> {
+                case '|' ->
+                {
                 }
-                default -> {
+                default ->
+                {
                     ChessGame.TeamColor color = Character.isLowerCase(c) ? ChessGame.TeamColor.BLACK
                             : ChessGame.TeamColor.WHITE;
                     var type = CHAR_TO_TYPE_MAP.get(Character.toLowerCase(c));
@@ -68,7 +78,8 @@ public class TestUtilities {
         return board;
     }
 
-    public static ChessBoard defaultBoard() {
+    public static ChessBoard defaultBoard()
+    {
         return loadBoard("""
                 |r|n|b|q|k|b|n|r|
                 |p|p|p|p|p|p|p|p|
@@ -81,20 +92,24 @@ public class TestUtilities {
                 """);
     }
 
-    public static List<ChessMove> loadMoves(ChessPosition startPosition, int[][] endPositions) {
+    public static List<ChessMove> loadMoves(ChessPosition startPosition, int[][] endPositions)
+    {
         var validMoves = new ArrayList<ChessMove>();
-        for (var endPosition : endPositions) {
+        for (var endPosition : endPositions)
+        {
             validMoves.add(new ChessMove(startPosition,
                     new ChessPosition(endPosition[0], endPosition[1]), null));
         }
         return validMoves;
     }
 
-    private static int positionToInt(ChessPosition position) {
+    private static int positionToInt(ChessPosition position)
+    {
         return 10 * position.getRow() + position.getColumn();
     }
 
-    private static int moveToInt(ChessMove move) {
+    private static int moveToInt(ChessMove move)
+    {
         return 1000 * positionToInt(move.getStartPosition()) + 10 * positionToInt(move.getEndPosition()) +
                 ((move.getPromotionPiece() != null) ? move.getPromotionPiece().ordinal() + 1 : 0);
     }

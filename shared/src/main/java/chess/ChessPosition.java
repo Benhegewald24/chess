@@ -3,12 +3,10 @@ package chess;
 /**
  * Represents a single square position on a chess board
  * <p>
- * Note: You can add to this class, but you may not alter
- * signature of the existing methods.
+ * Note: You can add to this class
  */
 public class ChessPosition
 {
-
     private final int row;
     private final int col;
 
@@ -24,7 +22,6 @@ public class ChessPosition
      */
     public int getRow()
     {
-        //throw new RuntimeException("Not implemented");
         return row;
     }
 
@@ -35,6 +32,5 @@ public class ChessPosition
     public int getColumn()
     {
         return col;
-        //throw new RuntimeException("Not implemented");
     }
 }
