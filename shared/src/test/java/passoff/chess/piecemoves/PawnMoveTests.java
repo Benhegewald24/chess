@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class PawnMoveTests {
 
     @Test
-    public void pawnMiddleOfBoardWhite() {
+    public void pawnMiddleOfBoardWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -29,7 +30,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnMiddleOfBoardBlack() {
+    public void pawnMiddleOfBoardBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -47,7 +49,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnInitialMoveWhite() {
+    public void pawnInitialMoveWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -64,7 +67,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnInitialMoveBlack() {
+    public void pawnInitialMoveBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | |p| | | | | |
@@ -82,7 +86,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnPromotionWhite() {
+    public void pawnPromotionWhite()
+    {
         validatePromotion("""
                         | | | | | | | | |
                         | | |P| | | | | |
@@ -100,7 +105,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void edgePromotionBlack() {
+    public void edgePromotionBlack()
+    {
         validatePromotion("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -118,7 +124,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnPromotionCapture() {
+    public void pawnPromotionCapture()
+    {
         validatePromotion("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -136,7 +143,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnAdvanceBlockedWhite() {
+    public void pawnAdvanceBlockedWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -153,7 +161,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnAdvanceBlockedBlack() {
+    public void pawnAdvanceBlockedBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -171,7 +180,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnAdvanceBlockedDoubleMoveWhite() {
+    public void pawnAdvanceBlockedDoubleMoveWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -188,7 +198,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnAdvanceBlockedDoubleMoveBlack() {
+    public void pawnAdvanceBlockedDoubleMoveBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | |p| | | | | |
@@ -206,7 +217,8 @@ public class PawnMoveTests {
 
 
     @Test
-    public void pawnCaptureWhite() {
+    public void pawnCaptureWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -223,7 +235,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCaptureBlack() {
+    public void pawnCaptureBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -240,7 +253,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnMoveFromEdgeWhite() {
+    public void pawnMoveFromEdgeWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -257,7 +271,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnMoveFromEdgeBlack() {
+    public void pawnMoveFromEdgeBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -274,7 +289,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCaptureFromEdgeWhite() {
+    public void pawnCaptureFromEdgeWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -291,7 +307,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCaptureFromEdgeBlack() {
+    public void pawnCaptureFromEdgeBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -308,7 +325,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCaptureFromStartWhite() {
+    public void pawnCaptureFromStartWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -325,7 +343,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCaptureFromStartBlack() {
+    public void pawnCaptureFromStartBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | |p| | | | |
@@ -342,7 +361,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void captureAndPromoteWhite() {
+    public void captureAndPromoteWhite()
+    {
         validatePromotion("""
                         | | |r| | | | | |
                         | | | |P| | | | |
@@ -359,7 +379,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void captureAndPromoteBlack() {
+    public void captureAndPromoteBlack()
+    {
         validatePromotion("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -376,7 +397,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCannotCaptureBackwardWhite() {
+    public void pawnCannotCaptureBackwardWhite()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -393,7 +415,8 @@ public class PawnMoveTests {
     }
 
     @Test
-    public void pawnCannotCaptureBackwardBlack() {
+    public void pawnCannotCaptureBackwardBlack()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | |R|R| | | | |
@@ -410,12 +433,14 @@ public class PawnMoveTests {
     }
 
 
-    private static void validatePromotion(String boardText, ChessPosition startingPosition, int[][] endPositions) {
+    private static void validatePromotion(String boardText, ChessPosition startingPosition, int[][] endPositions)
+    {
         var board = TestUtilities.loadBoard(boardText);
         var testPiece = board.getPiece(startingPosition);
         Assertions.assertNotNull(testPiece, "Could not find piece on board");
         var validMoves = new ArrayList<ChessMove>();
-        for (var endPosition : endPositions) {
+        for (var endPosition : endPositions)
+        {
             var end = new ChessPosition(endPosition[0], endPosition[1]);
             validMoves.add(new ChessMove(startingPosition, end, ChessPiece.PieceType.QUEEN));
             validMoves.add(new ChessMove(startingPosition, end, ChessPiece.PieceType.BISHOP));

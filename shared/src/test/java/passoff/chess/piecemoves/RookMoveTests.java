@@ -7,8 +7,8 @@ import passoff.chess.TestUtilities;
 public class RookMoveTests {
 
     @Test
-    public void rookMoveUntilEdge() {
-
+    public void rookMoveUntilEdge()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -31,7 +31,8 @@ public class RookMoveTests {
 
 
     @Test
-    public void rookCaptureEnemy() {
+    public void rookCaptureEnemy()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -53,7 +54,8 @@ public class RookMoveTests {
 
 
     @Test
-    public void rookBlocked() {
+    public void rookBlocked()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | |n|r|
                         | | | | | | | |p|
@@ -68,5 +70,4 @@ public class RookMoveTests {
                 new int[][]{}
         );
     }
-
 }

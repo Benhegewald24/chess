@@ -4,9 +4,11 @@ import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
 import passoff.chess.TestUtilities;
 
-public class QueenMoveTests {
+public class QueenMoveTests
+{
     @Test
-    public void queenMoveUntilEdge() {
+    public void queenMoveUntilEdge()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | |q| |
@@ -33,7 +35,8 @@ public class QueenMoveTests {
 
 
     @Test
-    public void queenCaptureEnemy() {
+    public void queenCaptureEnemy()
+    {
         TestUtilities.validateMoves("""
                         |b| | | | | | | |
                         | | | | | | | | |
@@ -57,7 +60,8 @@ public class QueenMoveTests {
 
 
     @Test
-    public void queenBlocked() {
+    public void queenBlocked()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |

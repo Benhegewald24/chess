@@ -4,10 +4,12 @@ import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
 import passoff.chess.TestUtilities;
 
-public class BishopMoveTests {
+public class BishopMoveTests
+{
 
     @Test
-    public void bishopMoveUntilEdge() {
+    public void bishopMoveUntilEdge()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -30,7 +32,8 @@ public class BishopMoveTests {
 
 
     @Test
-    public void bishopCaptureEnemy() {
+    public void bishopCaptureEnemy()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | |Q| | | | |
@@ -53,7 +56,8 @@ public class BishopMoveTests {
 
 
     @Test
-    public void bishopBlocked() {
+    public void bishopBlocked()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -68,5 +72,4 @@ public class BishopMoveTests {
                 new int[][]{}
         );
     }
-
 }
