@@ -11,6 +11,7 @@ public class ChessMove
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece)
     {
+
     }
 
     /**
@@ -18,6 +19,7 @@ public class ChessMove
      */
     public ChessPosition getStartPosition()
     {
+        //[startposition.getRow()];
         throw new RuntimeException("Not implemented");
     }
 

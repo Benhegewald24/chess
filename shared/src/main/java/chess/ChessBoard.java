@@ -8,9 +8,9 @@ package chess;
  */
 public class ChessBoard
 {
-    private ChessPiece[][] squares = new ChessPiece[8][8];
+    private ChessPiece [][] squares = new ChessPiece[8][8]; //Field
 
-    public ChessBoard()
+    public ChessBoard() //this is the constructor
     {
         //idk
     }
@@ -35,6 +35,10 @@ public class ChessBoard
      */
     public ChessPiece getPiece(ChessPosition position)
     {
+        if (squares[position.getRow()][position.getColumn()] == null)
+        {
+            return null;
+        }
         return squares[position.getRow()][position.getColumn()];
     }
 

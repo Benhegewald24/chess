@@ -10,7 +10,7 @@ import java.util.Collection;
 public class ChessGame
 {
 
-    public ChessGame()
+    public ChessGame() //Constructor
     {
 
     }
@@ -31,7 +31,8 @@ public class ChessGame
     public void setTeamTurn(TeamColor team)
     {
         //should start with white and then alternates
-        team = TeamColor.WHITE;
+        //team = TeamColor.WHITE;
+        throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -39,8 +40,7 @@ public class ChessGame
      */
     public enum TeamColor
     {
-        WHITE,
-        BLACK
+        WHITE, BLACK
     }
 
     /**
