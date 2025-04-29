@@ -7,8 +7,8 @@ package chess;
  */
 public class ChessPosition
 {
-    private final int row;  //fields
-    private final int col;
+    private final int row;  //field
+    private final int col;  //field
 
     public ChessPosition(int row, int col) //constructor
     {

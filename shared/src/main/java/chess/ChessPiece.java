@@ -11,14 +11,14 @@ import java.util.Collection;
  */
 public class ChessPiece
 {
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type)
+    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) //constructor
     {
     }
 
     /**
      * The various different chess piece options
      */
-    public enum PieceType
+    public enum PieceType //constructor pt 2?
     {
         KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
     }
