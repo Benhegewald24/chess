@@ -9,6 +9,7 @@ import java.util.Collection;
  */
 public class ChessGame
 {
+    //private ChessBoard board;
 
     public ChessGame() //Constructor
     {
@@ -75,6 +76,7 @@ public class ChessGame
     public boolean isInCheck(TeamColor teamColor)
     {
         throw new RuntimeException("Not implemented");
+        //King is in check is his position is found within possible move locations of opponents pieces.
     }
 
     /**
@@ -86,6 +88,7 @@ public class ChessGame
     public boolean isInCheckmate(TeamColor teamColor)
     {
         throw new RuntimeException("Not implemented");
+        //If king is inCheck but cannot move out.
     }
 
     /**
@@ -98,6 +101,7 @@ public class ChessGame
     public boolean isInStalemate(TeamColor teamColor)
     {
         throw new RuntimeException("Not implemented");
+        //If king is not in check but no possible moves.
     }
 
     /**
@@ -108,6 +112,39 @@ public class ChessGame
     public void setBoard(ChessBoard board)
     {
         throw new RuntimeException("Not implemented");
+        //c1.addPiece({1, 1}, ChessPiece.PieceType.ROOK);
+        //squares[1][1] = ChessPiece.PieceType.ROOK;
+        //squares.addPiece((1, 1), squares = PieceType.ROOK);
+        //squares.addPiece((1,2), KNIGHT);
+        //squares.addPiece((1,3), BISHOP);
+        //squares.addPiece((1,4), QUEEN);
+        //squares.addPiece((1,5), KING);
+        //squares.addPiece((1,6), BISHOP);
+        //squares.addPiece((1,7), KNIGHT);
+        //squares.addPiece((8, 1), ROOK);
+        //squares.addPiece((8,2), KNIGHT);
+        //squares.addPiece((8,3), BISHOP);
+        //squares.addPiece((8,4), KING);
+        //squares.addPiece((8,5), QUEEN);
+        //squares.addPiece((8,6), BISHOP);
+        //squares.addPiece((8,7), KNIGHT);
+        //squares.addPiece((8,8), ROOK);
+        //squares.addPiece((2,1), PAWN);
+        //squares.addPiece((2,2), PAWN);
+        //squares.addPiece((2,3), PAWN);
+        //squares.addPiece((2,4), PAWN);
+        //squares.addPiece((2,5), PAWN);
+        //squares.addPiece((2,6), PAWN);
+        //squares.addPiece((2,7), PAWN);
+        //squares.addPiece((2,8), PAWN);
+        //squares.addPiece((7,1), PAWN);
+        //squares.addPiece((7,2), PAWN);
+        //squares.addPiece((7,3), PAWN);
+        //squares.addPiece((7,4), PAWN);
+        //squares.addPiece((7,5), PAWN);
+        //squares.addPiece((7,6), PAWN);
+        //squares.addPiece((7,7), PAWN);
+        //squares.addPiece((7,8), PAWN);
     }
 
     /**
@@ -118,5 +155,6 @@ public class ChessGame
     public ChessBoard getBoard()
     {
         throw new RuntimeException("Not implemented");
+        //return board;
     }
 }

@@ -11,14 +11,18 @@ import java.util.Collection;
  */
 public class ChessPiece
 {
+//    private ChessGame.TeamColor TeamColor;
+//    private ChessPiece.PieceType PieceType;
+
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) //constructor
     {
+        //idk
     }
 
     /**
      * The various different chess piece options
      */
-    public enum PieceType //constructor pt 2?
+    public enum PieceType //is this a field?
     {
         KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
     }
@@ -29,15 +33,16 @@ public class ChessPiece
     public ChessGame.TeamColor getTeamColor()
     {
         //if piece == white than it belongs to white team. if piece == black than it belongs to the black team.
+        //return TeamColor;
         throw new RuntimeException("Not implemented");
     }
 
     /**
      * @return which type of chess piece this piece is
      */
-    public PieceType getPieceType()
+    public PieceType getPieceType() //because this is a getter, just return the associated instance variable
     {
-        //return idk
+        //return PieceType;
         throw new RuntimeException("Not implemented");
     }
 
@@ -48,12 +53,14 @@ public class ChessPiece
      *
      * @return Collection of valid moves
      */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition)
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) //Collection<> is a container for storing a bunch of objects. Includes Sets, ArrayLists, and LinkedLists, etc.
     {
-        //throw new RuntimeException("Not implemented");
 //        if (getPieceType() == PieceType.BISHOP)
 //        {
-//            while (col < 8 && row < 8) {}
+//            while (col < 8 && row < 8)
+//            {
+                    //ArrayList.add(row + 1, col + 1);
+//            }
 //        }
 
         return new ArrayList<>();

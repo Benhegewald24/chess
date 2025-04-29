@@ -8,6 +8,9 @@ package chess;
  */
 public class ChessMove
 {
+    //private ChessPosition startPosition;
+    //private ChessPosition endPosition;
+    //ChessPiece.PieceType promotionPiece;
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece) //Constructor
     {
@@ -19,6 +22,7 @@ public class ChessMove
      */
     public ChessPosition getStartPosition()
     {
+        //return startPosition;
         //[startposition.getRow()];
         throw new RuntimeException("Not implemented");
     }
@@ -28,6 +32,7 @@ public class ChessMove
      */
     public ChessPosition getEndPosition()
     {
+        //return endPosition;
         throw new RuntimeException("Not implemented");
     }
 
@@ -40,5 +45,6 @@ public class ChessMove
     public ChessPiece.PieceType getPromotionPiece()
     {
         throw new RuntimeException("Not implemented");
+        //return promotionPiece;
     }
 }

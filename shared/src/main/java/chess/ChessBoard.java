@@ -9,41 +9,11 @@ package chess;
 public class ChessBoard
 {
     private ChessPiece [][] squares = new ChessPiece[8][8]; //Field
+    //ChessBoard c1 = new ChessBoard();
 
-    public ChessBoard() //this is the constructor... so it should put all the pieces in place and get the game ready to go?
+    public ChessBoard() // Constructor
     {
-        //squares.addPiece((1, 1), ChessPiece.PieceType = ROOK);
-        //squares.addPiece((1,2), KNIGHT);
-        //squares.addPiece((1,3), BISHOP);
-        //squares.addPiece((1,4), QUEEN);
-        //squares.addPiece((1,5), KING);
-        //squares.addPiece((1,6), BISHOP);
-        //squares.addPiece((1,7), KNIGHT);
-        //squares.addPiece((8, 1), ROOK);
-        //squares.addPiece((8,2), KNIGHT);
-        //squares.addPiece((8,3), BISHOP);
-        //squares.addPiece((8,4), KING);
-        //squares.addPiece((8,5), QUEEN);
-        //squares.addPiece((8,6), BISHOP);
-        //squares.addPiece((8,7), KNIGHT);
-        //squares.addPiece((8,8), ROOK);
-        //squares.addPiece((2,1), PAWN);
-        //squares.addPiece((2,2), PAWN);
-        //squares.addPiece((2,3), PAWN);
-        //squares.addPiece((2,4), PAWN);
-        //squares.addPiece((2,5), PAWN);
-        //squares.addPiece((2,6), PAWN);
-        //squares.addPiece((2,7), PAWN);
-        //squares.addPiece((2,8), PAWN);
-        //squares.addPiece((7,1), PAWN);
-        //squares.addPiece((7,2), PAWN);
-        //squares.addPiece((7,3), PAWN);
-        //squares.addPiece((7,4), PAWN);
-        //squares.addPiece((7,5), PAWN);
-        //squares.addPiece((7,6), PAWN);
-        //squares.addPiece((7,7), PAWN);
-        //squares.addPiece((7,8), PAWN);
-
+        //idk
     }
 
     /**
