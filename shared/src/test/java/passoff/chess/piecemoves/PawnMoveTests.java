@@ -9,7 +9,8 @@ import passoff.chess.TestUtilities;
 
 import java.util.ArrayList;
 
-public class PawnMoveTests {
+public class PawnMoveTests
+{
 
     @Test
     public void pawnMiddleOfBoardWhite()

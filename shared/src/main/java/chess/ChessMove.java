@@ -10,13 +10,13 @@ public class ChessMove
 {
     private ChessPosition startPosition;
     private ChessPosition endPosition;
-    ChessPiece.PieceType promotionPiece;
+    private ChessPiece.PieceType promotionPiece;
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece) //Constructor
     {
-        //this.startPosition = startPosition;
-        //this.endPosition = endPosition;
-        //this.promotionPiece = promotionPiece;
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
+        this.promotionPiece = promotionPiece;
     }
 
     /**
@@ -46,5 +46,3 @@ public class ChessMove
         return this.promotionPiece;
     }
 }
-
-//public class Bishop extends ChessPiece {}
