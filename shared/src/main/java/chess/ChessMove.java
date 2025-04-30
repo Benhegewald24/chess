@@ -8,13 +8,15 @@ package chess;
  */
 public class ChessMove
 {
-    //private ChessPosition startPosition;
-    //private ChessPosition endPosition;
-    //ChessPiece.PieceType promotionPiece;
+    private ChessPosition startPosition;
+    private ChessPosition endPosition;
+    ChessPiece.PieceType promotionPiece;
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece) //Constructor
     {
-
+        //this.startPosition = startPosition;
+        //this.endPosition = endPosition;
+        //this.promotionPiece = promotionPiece;
     }
 
     /**
@@ -22,9 +24,7 @@ public class ChessMove
      */
     public ChessPosition getStartPosition()
     {
-        //return startPosition;
-        //[startposition.getRow()];
-        throw new RuntimeException("Not implemented");
+        return this.startPosition;
     }
 
     /**
@@ -32,8 +32,7 @@ public class ChessMove
      */
     public ChessPosition getEndPosition()
     {
-        //return endPosition;
-        throw new RuntimeException("Not implemented");
+        return this.endPosition;
     }
 
     /**
@@ -44,7 +43,8 @@ public class ChessMove
      */
     public ChessPiece.PieceType getPromotionPiece()
     {
-        throw new RuntimeException("Not implemented");
-        //return promotionPiece;
+        return this.promotionPiece;
     }
 }
+
+//public class Bishop extends ChessPiece {}

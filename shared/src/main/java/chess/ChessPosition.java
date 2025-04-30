@@ -7,8 +7,8 @@ package chess;
  */
 public class ChessPosition
 {
-    private final int row;  //field
-    private final int col;  //field
+    private final int row;  //instance variable
+    private final int col;  //instance variable
 
     public ChessPosition(int row, int col) //constructor
     {
@@ -22,7 +22,7 @@ public class ChessPosition
      */
     public int getRow()
     {
-        return row;
+        return this.row;
     }
 
     /**
@@ -31,6 +31,6 @@ public class ChessPosition
      */
     public int getColumn()
     {
-        return col;
+        return this.col;
     }
 }

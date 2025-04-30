@@ -9,7 +9,8 @@ import java.util.Collection;
  */
 public class ChessGame
 {
-    //private ChessBoard board;
+    private ChessBoard board;
+    private TeamColor team;
 
     public ChessGame() //Constructor
     {
@@ -21,7 +22,7 @@ public class ChessGame
      */
     public TeamColor getTeamTurn()
     {
-        throw new RuntimeException("Not implemented");
+        return this.team;
     }
 
     /**
@@ -31,9 +32,7 @@ public class ChessGame
      */
     public void setTeamTurn(TeamColor team)
     {
-        //should start with white and then alternates
-        //team = TeamColor.WHITE;
-        throw new RuntimeException("Not implemented");
+        this.team = team;
     }
 
     /**
@@ -154,7 +153,6 @@ public class ChessGame
      */
     public ChessBoard getBoard()
     {
-        throw new RuntimeException("Not implemented");
-        //return board;
+        return this.board;
     }
 }

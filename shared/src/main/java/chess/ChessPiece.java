@@ -11,18 +11,20 @@ import java.util.Collection;
  */
 public class ChessPiece
 {
-//    private ChessGame.TeamColor TeamColor;
-//    private ChessPiece.PieceType PieceType;
+    private ChessGame.TeamColor teamColor;
+    private ChessPiece.PieceType pieceType;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) //constructor
     {
         //idk
+        //this.pieceColor = pieceColor;
+        //this.type = type;
     }
 
     /**
      * The various different chess piece options
      */
-    public enum PieceType //is this a field?
+    public enum PieceType
     {
         KING, QUEEN, BISHOP, KNIGHT, ROOK, PAWN
     }
@@ -33,17 +35,15 @@ public class ChessPiece
     public ChessGame.TeamColor getTeamColor()
     {
         //if piece == white than it belongs to white team. if piece == black than it belongs to the black team.
-        //return TeamColor;
-        throw new RuntimeException("Not implemented");
+        return this.teamColor;
     }
 
     /**
      * @return which type of chess piece this piece is
      */
-    public PieceType getPieceType() //because this is a getter, just return the associated instance variable
+    public PieceType getPieceType()
     {
-        //return PieceType;
-        throw new RuntimeException("Not implemented");
+        return this.pieceType;
     }
 
     /**
