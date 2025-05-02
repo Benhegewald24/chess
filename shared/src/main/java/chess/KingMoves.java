@@ -51,8 +51,5 @@ public class KingMoves // Do we have to account for not allowing kings to move w
                 moves.add(p1);
             }
         }
-
-
-
     }
 }

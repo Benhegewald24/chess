@@ -41,10 +41,22 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow3, ccol3);
 
-            if (board.getPiece(pos) == null)
+            if (rrow3 == 8 && board.getPiece(pos) == null)
             {
-                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
+                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), ChessPiece.PieceType.KNIGHT);
                 moves.add(p1);
+                ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), ChessPiece.PieceType.QUEEN);
+                moves.add(p2);
+                ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), ChessPiece.PieceType.ROOK);
+                moves.add(p3);
+                ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), ChessPiece.PieceType.BISHOP);
+                moves.add(p4);
+            }
+
+            if (rrow3 != 1 && board.getPiece(pos) == null)
+            {
+            ChessMove p0 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
+            moves.add(p0);
             }
         }
 
@@ -58,10 +70,22 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow4, ccol4);
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            if (rrow4 == 8 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
-                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), null);
-                moves.add(p1);
+            ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), ChessPiece.PieceType.KNIGHT);
+            moves.add(p1);
+            ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), ChessPiece.PieceType.QUEEN);
+            moves.add(p2);
+            ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), ChessPiece.PieceType.ROOK);
+            moves.add(p3);
+            ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), ChessPiece.PieceType.BISHOP);
+            moves.add(p4);
+            }
+
+            if (rrow4 != 8 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            {
+                ChessMove p0 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), null);
+                moves.add(p0);
             }
         }
 
@@ -75,10 +99,22 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow5, ccol5);
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            if (rrow5 == 8 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+        {
+            ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), ChessPiece.PieceType.KNIGHT);
+            moves.add(p1);
+            ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), ChessPiece.PieceType.QUEEN);
+            moves.add(p2);
+            ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), ChessPiece.PieceType.ROOK);
+            moves.add(p3);
+            ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), ChessPiece.PieceType.BISHOP);
+            moves.add(p4);
+        }
+
+            if (rrow5 != 8 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
-                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), null);
-                moves.add(p1);
+                ChessMove p0 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), null);
+                moves.add(p0);
             }
         }
 
@@ -111,10 +147,22 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow8, ccol8);
 
-            if (board.getPiece(pos) == null)
+            if (rrow8 == 1 && board.getPiece(pos) == null)
             {
-                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), null);
+                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), ChessPiece.PieceType.KNIGHT);
                 moves.add(p1);
+                ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), ChessPiece.PieceType.QUEEN);
+                moves.add(p2);
+                ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), ChessPiece.PieceType.ROOK);
+                moves.add(p3);
+                ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), ChessPiece.PieceType.BISHOP);
+                moves.add(p4);
+
+            }
+            if (rrow8 != 1 && board.getPiece(pos) == null)
+            {
+                    ChessMove p0 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), null);
+                    moves.add(p0);
             }
         }
 
@@ -128,7 +176,19 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow10, ccol10);
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            if (rrow8 == 1 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            {
+                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow10, ccol10), ChessPiece.PieceType.KNIGHT);
+                moves.add(p1);
+                ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow10, ccol10), ChessPiece.PieceType.QUEEN);
+                moves.add(p2);
+                ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow10, ccol10), ChessPiece.PieceType.ROOK);
+                moves.add(p3);
+                ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow10, ccol10), ChessPiece.PieceType.BISHOP);
+                moves.add(p4);
+            }
+
+            if (rrow8 != 1 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow10, ccol10), null);
                 moves.add(p1);
@@ -145,7 +205,19 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
 
             ChessPosition pos = new ChessPosition(rrow11, ccol11);
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            if (rrow8 == 1 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            {
+                ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow11, ccol11), ChessPiece.PieceType.KNIGHT);
+                moves.add(p1);
+                ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow11, ccol11), ChessPiece.PieceType.QUEEN);
+                moves.add(p2);
+                ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow11, ccol11), ChessPiece.PieceType.ROOK);
+                moves.add(p3);
+                ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow11, ccol11), ChessPiece.PieceType.BISHOP);
+                moves.add(p4);
+            }
+
+            if (rrow8 != 1 && board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow11, ccol11), null);
                 moves.add(p1);

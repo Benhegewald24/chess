@@ -17,12 +17,13 @@ public class KnightMoves
         {
             int rrow1 = myPosition.getRow();
             int ccol1 = myPosition.getColumn();
+            rrow1 += 2;
+            ccol1++;
 
-            if (rrow1 <= 6 && ccol1 <= 7) //(r + 2, c + 1)
+            if (rrow1 <= 8 && ccol1 <= 8) //(r + 2, c + 1)
             {
-                rrow1 += 2;
-                ccol1++;
-                System.out.print("We are in the if statment");
+
+                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow1, ccol1);
                 System.out.print("pos has been created");
                 if (board.getPiece(pos) == null)
@@ -39,11 +40,12 @@ public class KnightMoves
 
             int rrow2 = myPosition.getRow();
             int ccol2 = myPosition.getColumn();
+            rrow2++;
+            ccol2 += 2;
 
-            if (rrow2 <= 7 && ccol2 <= 6) //(r + 1, c + 2)
+            if (rrow2 <= 8 && ccol2 <= 8) //(r + 1, c + 2)
             {
-                rrow2++;
-                ccol2 += 2;
+
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow2, ccol2);
                 System.out.print("pos has been created");
@@ -53,6 +55,7 @@ public class KnightMoves
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow2, ccol2), null);
                     moves.add(p1);
                 }
+
                 else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
                 {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow2, ccol2), null);
@@ -62,11 +65,11 @@ public class KnightMoves
 
             int rrow3 = myPosition.getRow();
             int ccol3 = myPosition.getColumn();
+            rrow3--;
+            ccol3 += 2;
 
-            if (rrow3 >= 2 && ccol3 <= 6) //(r - 1, c + 2)
+            if (rrow3 >= 1 && ccol3 <= 8) //(r - 1, c + 2)
             {
-                rrow3--;
-                ccol3 += 2;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow3, ccol3);
                 System.out.print("pos has been created");
@@ -76,6 +79,7 @@ public class KnightMoves
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
                     moves.add(p1);
                 }
+
                 else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
                 {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
@@ -85,19 +89,23 @@ public class KnightMoves
 
             int rrow4 = myPosition.getRow();
             int ccol4 = myPosition.getColumn();
+            rrow4 -= 2;
+            ccol4++;
 
-            if (rrow4 >= 3 && ccol4 <= 7) //(r - 2, c + 1)
+            if (rrow4 >= 1 && ccol4 <= 8) //(r - 2, c + 1)
             {
-                rrow4 -= 2;
-                ccol4++;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow4, ccol4);
                 System.out.print("pos has been created");
 
-                if (board.getPiece(pos) == null) {
+                if (board.getPiece(pos) == null)
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), null);
                     moves.add(p1);
-                } else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor())) {
+                }
+
+                else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), null);
                     moves.add(p1);
                 }
@@ -105,19 +113,23 @@ public class KnightMoves
 
             int rrow5 = myPosition.getRow();
             int ccol5 = myPosition.getColumn();
+            rrow5 -= 2;
+            ccol5--;
 
-            if (rrow5 >= 3 && ccol5 >= 2) //(r - 2, c - 1)
+            if (rrow5 >= 1 && ccol5 >= 1) //(r - 2, c - 1)
             {
-                rrow5 -= 2;
-                ccol5--;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow5, ccol5);
                 System.out.print("pos has been created");
 
-                if (board.getPiece(pos) == null) {
+                if (board.getPiece(pos) == null)
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), null);
                     moves.add(p1);
-                } else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor())) {
+                }
+
+                else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow5, ccol5), null);
                     moves.add(p1);
                 }
@@ -125,19 +137,23 @@ public class KnightMoves
 
             int rrow6 = myPosition.getRow();
             int ccol6 = myPosition.getColumn();
+            rrow6--;
+            ccol6 -= 2;
 
-            if (rrow6 >= 2 && ccol6 >= 3) //(r - 1, c - 2)
+            if (rrow6 >= 1 && ccol6 >= 1) //(r - 1, c - 2)
             {
-                rrow6--;
-                ccol6 -= 2;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow6, ccol6);
                 System.out.print("pos has been created");
 
-                if (board.getPiece(pos) == null) {
+                if (board.getPiece(pos) == null)
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow6, ccol6), null);
                     moves.add(p1);
-                } else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor())) {
+                }
+
+                else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow6, ccol6), null);
                     moves.add(p1);
                 }
@@ -145,19 +161,23 @@ public class KnightMoves
 
             int rrow7 = myPosition.getRow();
             int ccol7 = myPosition.getColumn();
+            rrow7++;
+            ccol7 -= 2;
 
-            if (rrow7 <= 7 && ccol7 >= 3) //(r + 1, c - 2)
+            if (rrow7 <= 8 && ccol7 >= 1) //(r + 1, c - 2)
             {
-                rrow7++;
-                ccol7 -= 2;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow7, ccol7);
                 System.out.print("pos has been created");
 
-                if (board.getPiece(pos) == null) {
+                if (board.getPiece(pos) == null)
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow7, ccol7), null);
                     moves.add(p1);
-                } else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor())) {
+                }
+
+                else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow7, ccol7), null);
                     moves.add(p1);
                 }
@@ -165,19 +185,23 @@ public class KnightMoves
 
             int rrow8 = myPosition.getRow();
             int ccol8 = myPosition.getColumn();
+            rrow8 += 2;
+            ccol8--;
 
-            if (rrow8 <= 6 && ccol8 >= 2) //(r + 2, c - 1)
+            if (rrow8 <= 8 && ccol8 >= 1) //(r + 2, c - 1)
             {
-                rrow8 += 2;
-                ccol8--;
                 System.out.print("We are in the if statment");
                 ChessPosition pos = new ChessPosition(rrow8, ccol8);
                 System.out.print("pos has been created");
 
-                if (board.getPiece(pos) == null) {
+                if (board.getPiece(pos) == null)
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), null);
                     moves.add(p1);
-                } else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor())) {
+                }
+
+                else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+                {
                     ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow8, ccol8), null);
                     moves.add(p1);
                 }

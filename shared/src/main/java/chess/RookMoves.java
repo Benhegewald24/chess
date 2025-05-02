@@ -27,7 +27,7 @@ public class RookMoves
                 moves.add(p1);
             }
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p1 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow1, ccol1), null);
                 moves.add(p1);
@@ -54,7 +54,7 @@ public class RookMoves
                 moves.add(p2);
             }
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p2 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow2, ccol2), null);
                 moves.add(p2);
@@ -81,7 +81,7 @@ public class RookMoves
                 moves.add(p3);
             }
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p3 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
                 moves.add(p3);
@@ -108,7 +108,7 @@ public class RookMoves
                 moves.add(p4);
             }
 
-            if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
+            else if (board.getPiece(pos) != null && (board.getPiece(pos).getTeamColor() != board.getPiece(myPosition).getTeamColor()))
             {
                 ChessMove p4 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow4, ccol4), null);
                 moves.add(p4);
@@ -120,5 +120,6 @@ public class RookMoves
                 break;
             }
         }
+
     }
 }
