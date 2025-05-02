@@ -123,6 +123,7 @@ public class QueenMoves
                 break;
             }
         }
+
         int rrow5 = myPosition.getRow();
         int ccol5 = myPosition.getColumn();
 
