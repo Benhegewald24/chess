@@ -53,7 +53,7 @@ public class PawnMoves //need to implement Promotions as well as En Passant?
                 moves.add(p4);
             }
 
-            if (rrow3 != 1 && board.getPiece(pos) == null)
+            if (rrow3 != 8 && board.getPiece(pos) == null)
             {
             ChessMove p0 = new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(rrow3, ccol3), null);
             moves.add(p0);

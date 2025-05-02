@@ -52,7 +52,7 @@ public class ChessBoard
      */
     public void addPiece(ChessPosition position, ChessPiece piece)
     {
-        squares[position.getRow()][position.getColumn()] = piece;
+        squares[position.getRow() - 1][position.getColumn() - 1] = piece;
     }
 
     /**
@@ -64,11 +64,7 @@ public class ChessBoard
      */
     public ChessPiece getPiece(ChessPosition position)
     {
-        if (squares[position.getRow()][position.getColumn()] == null)
-        {
-            return null;
-        }
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow() - 1][position.getColumn() - 1];
     }
 
     /**
