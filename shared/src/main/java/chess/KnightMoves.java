@@ -22,10 +22,7 @@ public class KnightMoves
 
             if (rrow1 <= 8 && ccol1 <= 8) //(r + 2, c + 1)
             {
-
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow1, ccol1);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -46,10 +43,7 @@ public class KnightMoves
 
             if (rrow2 <= 8 && ccol2 <= 8) //(r + 1, c + 2)
             {
-
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow2, ccol2);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -71,9 +65,7 @@ public class KnightMoves
 
             if (rrow3 >= 1 && ccol3 <= 8) //(r - 1, c + 2)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow3, ccol3);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -95,9 +87,7 @@ public class KnightMoves
 
             if (rrow4 >= 1 && ccol4 <= 8) //(r - 2, c + 1)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow4, ccol4);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -119,9 +109,7 @@ public class KnightMoves
 
             if (rrow5 >= 1 && ccol5 >= 1) //(r - 2, c - 1)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow5, ccol5);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -143,9 +131,7 @@ public class KnightMoves
 
             if (rrow6 >= 1 && ccol6 >= 1) //(r - 1, c - 2)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow6, ccol6);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -167,9 +153,7 @@ public class KnightMoves
 
             if (rrow7 <= 8 && ccol7 >= 1) //(r + 1, c - 2)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow7, ccol7);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
@@ -191,9 +175,7 @@ public class KnightMoves
 
             if (rrow8 <= 8 && ccol8 >= 1) //(r + 2, c - 1)
             {
-                System.out.print("We are in the if statment\n");
                 ChessPosition pos = new ChessPosition(rrow8, ccol8);
-                System.out.print("pos has been created\n");
 
                 if (board.getPiece(pos) == null)
                 {
