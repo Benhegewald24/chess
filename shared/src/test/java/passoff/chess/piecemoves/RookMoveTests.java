@@ -4,7 +4,8 @@ import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
 import passoff.chess.TestUtilities;
 
-public class RookMoveTests {
+public class RookMoveTests
+{
 
     @Test
     public void rookMoveUntilEdge()

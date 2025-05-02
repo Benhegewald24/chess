@@ -89,163 +89,37 @@ public class ChessPiece
             BishopMoves b1 = new BishopMoves();
             b1.move(board, myPosition, moves);
         }
+
+        if (p3 == PieceType.ROOK)
+        {
+            RookMoves r1 = new RookMoves();
+            r1.move(board, myPosition, moves);
+        }
+
+        if (p3 == PieceType.KING)
+        {
+            KingMoves k1 = new KingMoves();
+            k1.move(board, myPosition, moves);
+        }
+
+        if (p3 == PieceType.QUEEN)
+        {
+            QueenMoves q1 = new QueenMoves();
+            q1.move(board, myPosition, moves);
+        }
+
+        if (p3 == PieceType.PAWN)
+        {
+            PawnMoves pa1 = new PawnMoves();
+            pa1.move(board, myPosition, moves);
+        }
+
+        if (p3 == PieceType.KNIGHT)
+        {
+            KnightMoves kn1 = new KnightMoves();
+            kn1.move(board, myPosition, moves);
+        }
+
         return moves;
     }
 }
-
-//{
-//     if piecetype == bishop
-// move NE (r+1, c+1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList and increment position}
-//    if the space is != null && the piece there is different color {we can capture / move so add position. Then break! We can't move through the opposing piece}
-//    else (break)
-// move SE (r+1, c-1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position. Then break! We can't move through the opposing piece}
-//    else (break)
-// move SW (r-1, c-1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-// move NW (r-1, c+1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-//}
-
-
-// Do we have to account for not allowing kings to move within a space of one another?
-//     if piecetype == King
-//          while between 1 and 8 (nested for loops)
-//            if this space (r + 1, c) is null || that space has a piece that is different color (can move)
-//           (r + 1, c + 1)
-//           (r, c + 1)
-//           (r - 1, c + 1)
-//           (r - 1, c)
-//           (r - 1, c - 1)
-//           (r, c - 1)
-//           (r + 1, c - 1)
-//}
-
-
-//{
-//     if piecetype == Knight
-//          while between 1 and 8 (nested for loops)
-//            if this space (r + 2, c + 1) is null || that space has a piece that is different color (can move)
-//           (r + 1, c + 2)
-//           (r - 1, c + 2)
-//           (r - 2, c + 1)
-//           (r - 2, c - 1)
-//           (r - 2, c - 1)
-//           (r - 2, c + 1)
-//           (r + 2, c - 1)
-//}
-
-
-
-// pseudo code for Pawn movement. (En passant can be ignored. Also later will implement promotions?)
-// Because pawns can't move backwards, may need a white pawn copy and a black pawn copy?
-//public class Pawn extends ChessPiece
-//{
-//     if piecetype == Pawn && color == white
-//          while between 1 and 8 (nested for loops)
-//              if (on row #2) (can move 2 spaces or just 1 space)
-//                   if  (r + 1, c) == null, can move forward)
-//                   if  (r + 2, c) == null, can move forward)
-
-//      if (r + 1, c - 1) is != null and the piece is other color, you can capture/move
-//       if  (r + 1, c) == null, can move forward)
-//       if (r + 1, c - 1) is != null and the piece is other color, you can capture/move
-
-
-//    if piecetype == Pawn && color == black
-//          while between 1 and 8 (nested for loops)
-//              if (on row #7) (can move 2 spaces or just 1 space)
-
-//      if (r - 1, c - 1) is != null and the piece is other color, you can capture/move
-//       if  (r - 1, c) == null, can move forward)
-//       if (r - 1, c - 1) is != null and the piece is other color, you can capture/move
-//}
-
-
-//{
-//     if piecetype == Queen
-// move NE (r+1, c+1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position. Then break! We can't move through the opposing piece}
-//    else (break or move on to the next direction)
-
-// move E (r, c+1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break or move on to the next direction)
-
-// move SE (r+1, c-1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-
-// move S (r-1, c)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break or move on to the next direction)
-
-// move SW (r-1, c-1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-
-// move W (r, c - 1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break or move on to the next direction)
-
-// move NW (r-1, c+1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-//}
-
-// move N (r + 1, c)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break or move on to the next direction)
-
-
-
-//{
-//     if piecetype == Rook
-// move N (r+1, c)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList. }
-//    if the space is != null && the piece there is different color {we can capture / move so add position. Then break! We can't move through the opposing piece}
-//    else (break)
-// move E (r, c + 1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-// move S (r - 1, c)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-// move W (r, c - 1)
-//    while we are between 1 and 8 on the columns and rows. (nested for loop 1 for columns and 1 for rows)
-//    if the space is == null {we can move so add position to moves ArrayList}
-//    if the space is != null && the piece there is different color {we can capture / move so add position}
-//    else (break)
-//}
-
