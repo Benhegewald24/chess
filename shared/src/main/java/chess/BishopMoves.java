@@ -104,8 +104,6 @@ public class BishopMoves
             rrow4++;
             ccol4--;
 
-            //if (rrow4 < 1 || rrow4 > 8 || ccol4 < 1 || ccol4 > 8) {break;}
-
             ChessPosition pos = new ChessPosition(rrow4, ccol4);
 
             if (board.getPiece(pos) == null)

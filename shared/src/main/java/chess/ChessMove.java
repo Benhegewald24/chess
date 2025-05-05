@@ -11,6 +11,15 @@ import java.util.Objects;
 public class ChessMove
 {
     private ChessPosition startPosition;
+    private ChessPosition endPosition;
+    private ChessPiece.PieceType promotionPiece;
+
+    public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece) //Constructor
+    {
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
+        this.promotionPiece = promotionPiece;
+    }
 
     @Override
     public boolean equals(Object o)
@@ -29,9 +38,6 @@ public class ChessMove
         return Objects.hash(startPosition, endPosition, promotionPiece);
     }
 
-    private ChessPosition endPosition;
-    private ChessPiece.PieceType promotionPiece;
-
     @Override
     public String toString()
     {
@@ -40,13 +46,6 @@ public class ChessMove
                 ", endPosition=" + endPosition +
                 ", promotionPiece=" + promotionPiece +
                 '}';
-    }
-
-    public ChessMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece) //Constructor
-    {
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
-        this.promotionPiece = promotionPiece;
     }
 
     /**

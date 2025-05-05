@@ -12,10 +12,10 @@ import java.util.Objects;
  */
 public class ChessPiece
 {
-    private ChessGame.TeamColor teamColor;
+    private ChessGame.TeamColor teamColor; //Uses dot operator to access Enum from a Class.
     private PieceType pieceType;
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) //constructor
+    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) //Constructor
     {
         this.teamColor = pieceColor;
         this.pieceType = type;

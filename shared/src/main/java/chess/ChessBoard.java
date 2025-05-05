@@ -3,6 +3,8 @@ package chess;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static chess.ChessPiece.PieceType.*;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -12,12 +14,8 @@ import java.util.Objects;
 public class ChessBoard
 {
     private ChessPiece [][] squares = new ChessPiece[8][8]; //Field
-    //ChessBoard c1 = new ChessBoard();
 
-    public ChessBoard() // Constructor
-    {
-        //idk
-    }
+    public ChessBoard() {} // Constructor
 
     @Override
     public boolean equals(Object o)
@@ -71,10 +69,8 @@ public class ChessBoard
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */
-    public void resetBoard()
+    public void resetBoard() //should this just call setBoard?
     {
-        throw new RuntimeException("Not implemented");
-        //ChessBoard();
-        //Also account for removing pieces from the previous game... just make a brand new instance of the ChessBoard class?
+        ChessBoard b2 = new ChessBoard();
     }
 }
