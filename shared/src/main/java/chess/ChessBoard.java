@@ -204,8 +204,6 @@ public class ChessBoard
         ChessPiece pi32 = new ChessPiece(WHITE, PAWN);
         board.addPiece(po32, pi32);
 
-
-
         this.squares = board.squares;
     }
 }
