@@ -3,7 +3,8 @@ package chess;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static chess.ChessGame.TeamColor.*;
+import static chess.ChessGame.TeamColor.BLACK;
+import static chess.ChessGame.TeamColor.WHITE;
 import static chess.ChessPiece.PieceType.*;
 
 /**
@@ -18,11 +19,7 @@ public class ChessBoard
     private ChessPosition position;
     private ChessPiece piece;
 
-    public ChessBoard()
-    {
-        this.position = position;
-        this.piece = piece;
-    }
+    public ChessBoard() {}
 
     @Override
     public boolean equals(Object o) {
