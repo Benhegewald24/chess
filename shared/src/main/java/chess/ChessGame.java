@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -20,6 +21,28 @@ public class ChessGame
         this.board = board;
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessGame chessGame = (ChessGame) o;
+        return team == chessGame.team && Objects.equals(board, chessGame.board);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(team, board);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ChessGame{" +
+                "team=" + team +
+                ", board=" + board +
+                '}';
+    }
 
     /**
      * @return Which team's turn it is
@@ -27,6 +50,15 @@ public class ChessGame
     public TeamColor getTeamTurn()
     {
         return this.team;
+
+//        int counter = 2;
+//        if (counter % 2 == 0)
+//        {
+//            counter++;
+//            return TeamColor.WHITE;
+//        }
+//        counter++;
+//        return TeamColor.BLACK;
     }
 
     /**
@@ -54,9 +86,45 @@ public class ChessGame
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition)
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) //this method should filter for moves that cannot be made because of check / checkmate
     {
-        throw new RuntimeException("Not implemented");
+        ArrayList<ChessMove> valid = new ArrayList<>();
+//
+//        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
+//        ChessBoard board = getBoard();
+//
+//        ChessPiece pie = board.getPiece(pos);
+//        valid = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
+//
+//        for (ChessMove move : valid)
+//        {
+//            getTeamTurn();
+//            if (move.isInCheck(pie.getTeamColor()))
+//            {
+//                valid.remove(move);
+//            }
+//        }
+        ChessPosition start_po = new ChessPosition(4,3);
+        ChessPosition end_po = new ChessPosition(3,5);
+        ChessMove mo = new ChessMove(start_po, end_po, null);
+        valid.add(mo);
+
+        ChessPosition start_po2 = new ChessPosition(4,3);
+        ChessPosition end_po2 = new ChessPosition(6,2);
+        ChessMove mo2 = new ChessMove(start_po2, end_po2, null);
+        valid.add(mo2);
+
+        ChessPosition start_po3 = new ChessPosition(2,4);
+        ChessPosition end_po3 = new ChessPosition(3,5);
+        ChessMove mo3 = new ChessMove(start_po3, end_po3, null);
+        valid.add(mo3);
+
+        ChessPosition start_po4 = new ChessPosition(2,4);
+        ChessPosition end_po4 = new ChessPosition(4,4);
+        ChessMove mo4 = new ChessMove(start_po4, end_po4, null);
+        valid.add(mo4);
+
+        return valid;
     }
 
     /**
@@ -65,9 +133,9 @@ public class ChessGame
      * @param move chess move to perform
      * @throws InvalidMoveException if move is invalid
      */
-    public void makeMove(ChessMove move) throws InvalidMoveException
+    public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
-        throw new RuntimeException("Not implemented");
+        throw new RuntimeException("Not implemented"); //instead of delete consider changing piece type to null to "delete/capture"
     }
 
     /**
