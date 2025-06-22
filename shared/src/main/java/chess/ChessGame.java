@@ -84,24 +84,27 @@ public class ChessGame
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) //this method should filter for moves that cannot be made because of check / checkmate
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException //this method should filter for moves that cannot be made because of check / checkmate
     {
         ArrayList<ChessMove> valid = new ArrayList<>();
-//
-//        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
-//        ChessBoard board = getBoard();
-//
-//        ChessPiece pie = board.getPiece(pos);
-//        valid = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
-//
-//        for (ChessMove move : valid)
-//        {
-//            getTeamTurn();
-//            if (move.isInCheck(pie.getTeamColor()))
-//            {
-//                valid.remove(move);
-//            }
-//        }
+
+        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
+        ChessBoard board = getBoard();
+
+        ChessPiece pie = board.getPiece(pos);
+        valid = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
+
+        for (ChessMove move : valid)
+        {
+            TeamColor color = getTeamTurn();
+            makeMove(move);
+            if (isInCheckmate(color) || isInCheck(color) || isInStalemate(color))
+            {
+                break;
+            }
+
+            valid.add(move);
+        }
 
         /*
         Below is code to try to hard code pass the tests for the valid moves
@@ -142,7 +145,7 @@ public class ChessGame
      */
     public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
-        throw new RuntimeException("Not implemented");
+        //throw new RuntimeException("Not implemented");
         /*
 
         1. get the board to see if it is a capture (if a piece is already at that ENDPOSITION)
@@ -153,6 +156,22 @@ public class ChessGame
 
         */
 
+        if (move.getPromotionPiece() != null) //pawn promotions
+        {
+            ChessPiece.PieceType t = move.getPromotionPiece();
+            ChessPiece t3 = new ChessPiece(getTeamTurn(), t);
+
+            board.addPiece(move.getStartPosition(), null); // beginning position is now null
+            board.addPiece(move.getEndPosition(), t3); // end position is now the promoted piece
+        }
+
+        else //non-pawn promotion
+        {
+            ChessPiece p3 = board.getPiece(move.getEndPosition());
+
+            board.addPiece(move.getStartPosition(), null); // beginning position is now null
+            board.addPiece(move.getEndPosition(), p3); // end position is now the promoted piece
+        }
     }
 
     /**
