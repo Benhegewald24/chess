@@ -11,13 +11,14 @@ import passoff.chess.TestUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidMovesTests {
+public class ValidMovesTests
+{
     private static final String TRAPPED_PIECE_MOVES = "ChessGame validMoves returned valid moves for a trapped piece";
 
     @Test
-    @DisplayName("Check Forces Movement")
-    public void forcedMove() {
-
+    @DisplayName("Check Forces Movement") //[B]ishop has k in check. k must move or [n]ight block or [q]ueen block.
+    public void forcedMove()
+    {
         var game = new ChessGame();
         game.setTeamTurn(ChessGame.TeamColor.BLACK);
         game.setBoard(TestUtilities.loadBoard("""
@@ -40,12 +41,15 @@ public class ValidMovesTests {
         ChessPosition queenPosition = new ChessPosition(2, 4);
         validMoves = TestUtilities.loadMoves(queenPosition, new int[][]{{3, 5}, {4, 4}});
         assertMoves(game, validMoves, queenPosition);
+
+        //WHY ARE THERE NO VALID MOVES FOR THE KING?
     }
 
 
     @Test
-    @DisplayName("Piece Partially Trapped")
-    public void moveIntoCheck() {
+    @DisplayName("Piece Partially Trapped") //Rook can only move along Row 5 (pinned)... so the tests ignore king moves out of danger?
+    public void moveIntoCheck()
+    {
 
         var game = new ChessGame();
         game.setBoard(TestUtilities.loadBoard("""
@@ -68,9 +72,9 @@ public class ValidMovesTests {
     }
 
     @Test
-    @DisplayName("Piece Completely Trapped")
-    public void rookPinnedToKing() {
-
+    @DisplayName("Piece Completely Trapped") //[r]ook is pinned by the [Q]ueen
+    public void rookPinnedToKing()
+    {
         var game = new ChessGame();
         game.setBoard(TestUtilities.loadBoard("""
                     |K| | | | | | |Q|
@@ -89,9 +93,9 @@ public class ValidMovesTests {
 
 
     @Test
-    @DisplayName("Pieces Cannot Eliminate Check")
-    public void kingInDanger() {
-
+    @DisplayName("Pieces Cannot Eliminate Check") // [k]ing's only move is to take the [P]awn on at [5, 4].
+    public void kingInDanger()
+    {
         var game = new ChessGame();
         game.setTeamTurn(ChessGame.TeamColor.BLACK);
         game.setBoard(TestUtilities.loadBoard("""
@@ -128,9 +132,9 @@ public class ValidMovesTests {
 
 
     @Test
-    @DisplayName("King Cannot Move Into Check")
-    public void noPutSelfInDanger() {
-
+    @DisplayName("King Cannot Move Into Check") //Kings must stay a space away.
+    public void noPutSelfInDanger()
+    {
         var game = new ChessGame();
         game.setBoard(TestUtilities.loadBoard("""
                     | | | | | | | | |
@@ -151,8 +155,9 @@ public class ValidMovesTests {
     }
 
     @Test
-    @DisplayName("Valid Moves Independent of Team Turn")
-    public void validMovesOtherTeam() {
+    @DisplayName("Valid Moves Independent of Team Turn") // I have no idea. Has to be a black rook or queen with a white piece on [4, 5] or a black piece on [5, 5]. Also a black piece on [1, 5]/
+    public void validMovesOtherTeam()
+    {
         var game = new ChessGame();
         game.setBoard(TestUtilities.defaultBoard());
         game.setTeamTurn(ChessGame.TeamColor.BLACK);

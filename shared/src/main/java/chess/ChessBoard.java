@@ -27,12 +27,10 @@ public class ChessBoard
         ChessBoard that = (ChessBoard) o;
         return Objects.deepEquals(squares, that.squares) && Objects.equals(position, that.position) && Objects.equals(piece, that.piece);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(Arrays.deepHashCode(squares), position, piece);
     }
-
     @Override
     public String toString() {
         return "ChessBoard{" +

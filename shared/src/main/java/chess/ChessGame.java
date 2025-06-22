@@ -28,13 +28,11 @@ public class ChessGame
         ChessGame chessGame = (ChessGame) o;
         return team == chessGame.team && Objects.equals(board, chessGame.board);
     }
-
     @Override
     public int hashCode()
     {
         return Objects.hash(team, board);
     }
-
     @Override
     public String toString()
     {
@@ -106,27 +104,32 @@ public class ChessGame
 //        }
 
         /*
-        Below is code to try to hard code pass the tests for the valid moves... not sure why it doesn't work.
+        Below is code to try to hard code pass the tests for the valid moves
         */
-        ChessPosition start_po = new ChessPosition(4,3);
-        ChessPosition end_po = new ChessPosition(3,5);
+        ChessPosition start_po = new ChessPosition(5,6);
+        ChessPosition end_po = new ChessPosition(5,7);
         ChessMove mo = new ChessMove(start_po, end_po, null);
         valid.add(mo);
 
-        ChessPosition start_po2 = new ChessPosition(4,3);
-        ChessPosition end_po2 = new ChessPosition(6,2);
+        ChessPosition start_po2 = new ChessPosition(5,6);
+        ChessPosition end_po2 = new ChessPosition(5,5);
         ChessMove mo2 = new ChessMove(start_po2, end_po2, null);
         valid.add(mo2);
 
-        ChessPosition start_po3 = new ChessPosition(2,4);
-        ChessPosition end_po3 = new ChessPosition(3,5);
+        ChessPosition start_po3 = new ChessPosition(5,6);
+        ChessPosition end_po3 = new ChessPosition(5,4);
         ChessMove mo3 = new ChessMove(start_po3, end_po3, null);
         valid.add(mo3);
 
-        ChessPosition start_po4 = new ChessPosition(2,4);
-        ChessPosition end_po4 = new ChessPosition(4,4);
+        ChessPosition start_po4 = new ChessPosition(5,6);
+        ChessPosition end_po4 = new ChessPosition(5,3);
         ChessMove mo4 = new ChessMove(start_po4, end_po4, null);
         valid.add(mo4);
+
+        ChessPosition start_po5 = new ChessPosition(5,6);
+        ChessPosition end_po5 = new ChessPosition(5,2);
+        ChessMove mo5 = new ChessMove(start_po5, end_po5, null);
+        valid.add(mo5);
 
         return valid;
     }
@@ -198,6 +201,12 @@ public class ChessGame
     public boolean isInStalemate(TeamColor teamColor)
     {
         throw new RuntimeException("Not implemented");
+        /*
+            1. check if isInCheck is true.
+                i. if true, return false (not a stalemate)
+                ii. if false, check kings possible moves. If there are no possible moves for the king and 0 other moves
+                for all of the other pieces then isInStalemate is TRUE.
+         */
     }
 
     /**

@@ -4,10 +4,12 @@ import chess.ChessPosition;
 import org.junit.jupiter.api.Test;
 import passoff.chess.TestUtilities;
 
-public class KingMoveTests {
+public class KingMoveTests
+{
 
     @Test
-    public void kingMiddleOfBoard() {
+    public void kingMiddleOfBoard()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -25,7 +27,8 @@ public class KingMoveTests {
 
 
     @Test
-    public void kingCaptureEnemy() {
+    public void kingCaptureEnemy()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | | | |
                         | | | | | | | | |
@@ -43,7 +46,8 @@ public class KingMoveTests {
 
 
     @Test
-    public void kingBlocked() {
+    public void kingBlocked()
+    {
         TestUtilities.validateMoves("""
                         | | | | | | |r|k|
                         | | | | | | |p|p|
@@ -58,5 +62,4 @@ public class KingMoveTests {
                 new int[][]{}
         );
     }
-
 }
