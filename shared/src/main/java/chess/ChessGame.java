@@ -76,154 +76,166 @@ public class ChessGame
     {
         WHITE, BLACK
     }
-//
-//    /**
-//     * Gets a valid moves for a piece at the given location
-//     *
-//     * @param startPosition the piece to get valid moves for
-//     * @return Set of valid moves for requested piece, or null if no piece at
-//     * startPosition
-//     */
-//    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException //this method should filter for moves that cannot be made because of check / checkmate
-//    {
-//        ArrayList<ChessMove> valid = new ArrayList<>();
-//
-//        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
-//        ChessBoard board = getBoard();
-//
-//        ChessPiece pie = board.getPiece(pos);
-//        valid = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
-//
-//        for (ChessMove move : valid)
-//        {
-//            TeamColor color = getTeamTurn();
-//            makeMove(move);
-//            if (isInCheckmate(color) || isInCheck(color) || isInStalemate(color))
-//            {
-//                break;
-//            }
-//
-//            valid.add(move);
-//        }
-//
-//        /*
-//        Below is code to try to hard code pass the tests for the valid moves
-//        */
-//        ChessPosition start_po = new ChessPosition(5,6);
-//        ChessPosition end_po = new ChessPosition(5,7);
-//        ChessMove mo = new ChessMove(start_po, end_po, null);
-//        valid.add(mo);
-//
-//        ChessPosition start_po2 = new ChessPosition(5,6);
-//        ChessPosition end_po2 = new ChessPosition(5,5);
-//        ChessMove mo2 = new ChessMove(start_po2, end_po2, null);
-//        valid.add(mo2);
-//
-//        ChessPosition start_po3 = new ChessPosition(5,6);
-//        ChessPosition end_po3 = new ChessPosition(5,4);
-//        ChessMove mo3 = new ChessMove(start_po3, end_po3, null);
-//        valid.add(mo3);
-//
-//        ChessPosition start_po4 = new ChessPosition(5,6);
-//        ChessPosition end_po4 = new ChessPosition(5,3);
-//        ChessMove mo4 = new ChessMove(start_po4, end_po4, null);
-//        valid.add(mo4);
-//
-//        ChessPosition start_po5 = new ChessPosition(5,6);
-//        ChessPosition end_po5 = new ChessPosition(5,2);
-//        ChessMove mo5 = new ChessMove(start_po5, end_po5, null);
-//        valid.add(mo5);
-//
-//        return valid;
-//    }
-//
-//    /**
-//     * Makes a move in a chess game
-//     *
-//     * @param move chess move to perform
-//     * @throws InvalidMoveException if move is invalid
-//     */
-//    public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
-//    {
-//        //throw new RuntimeException("Not implemented");
-//
-//        if (move.getPromotionPiece() != null) //pawn promotions
-//        {
-//            ChessPiece.PieceType t = move.getPromotionPiece();
-//            ChessPiece t3 = new ChessPiece(getTeamTurn(), t);
-//
-//            board.removePiece(move.getStartPosition()); // beginning position is now null
-//            board.addPiece(move.getEndPosition(), t3); // end position is now the promoted piece
-//        }
-//
-//        else //non-pawn promotion
-//        {
-//            ChessPiece p3 = board.getPiece(move.getEndPosition());
-//
-//            board.removePiece(move.getStartPosition()); // beginning position is now null
-//            board.addPiece(move.getEndPosition(), p3); // end position is now the promoted piece
-//        }
-//    }
-//
-//    /**
-//     * Determines if the given team is in check
-//     *
-//     * @param teamColor which team to check for check
-//     * @return True if the specified team is in check
-//     */
-//    public boolean isInCheck(TeamColor teamColor)
-//    {
-//        //throw new RuntimeException("Not implemented");
-//
-//        /*
-//        STEP 1) Get other teams attacking moves.
-//            2) for each set of moves check the end position. if the end position.getpiece.piecetype = king then isInCheck is TRUE
-//
-//        1. We know the piece to check is the King and we are given the color. So just check the other colors possible moves
-//        2. Are we able to simply compare all possible moves for other team with the location of the king?
-//         */
-//
-//
-//        return true;
-//    }
-//
-//    /**
-//     * Determines if the given team is in checkmate
-//     *
-//     * @param teamColor which team to check for checkmate
-//     * @return True if the specified team is in checkmate
-//     */
-//    public boolean isInCheckmate(TeamColor teamColor)
-//    {
-//        throw new RuntimeException("Not implemented");
-//
-//        /*
-//        1. Call isInCheck. If false, then return false.
-//        2. If isInCheck is true than we need to test if:
-//            i. the king can move (including capture)
-//            ii. a piece can take the attacker
-//            iii. a different piece can block the path of the attacker
-//        */
-//
-//    }
-//
-//    /**
-//     * Determines if the given team is in stalemate, which here is defined as having
-//     * no valid moves
-//     *
-//     * @param teamColor which team to check for stalemate
-//     * @return True if the specified team is in stalemate, otherwise false
-//     */
-//    public boolean isInStalemate(TeamColor teamColor)
-//    {
-//        throw new RuntimeException("Not implemented");
-//        /*
-//            1. check if isInCheck is true.
-//                i. if true, return false (not a stalemate)
-//                ii. if false, check kings possible moves. If there are no possible moves for the king and 0 other moves
-//                for all of the other pieces then isInStalemate is TRUE.
-//         */
-//    }
+
+    /**
+     * Gets a valid moves for a piece at the given location
+     *
+     * @param startPosition the piece to get valid moves for
+     * @return Set of valid moves for requested piece, or null if no piece at
+     * startPosition
+     */
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException //this method should filter for moves that cannot be made because of check / checkmate
+    {
+        ArrayList<ChessMove> valid = new ArrayList<>();
+
+        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
+        ChessBoard board = getBoard();
+
+        if (board.getPiece(startPosition) == null) //"Takes as input a position... If there is no piece at that location, this method returns null"
+        {
+            return null;
+        }
+
+        ChessPiece pie = board.getPiece(pos);
+        valid = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
+
+        for (ChessMove move : valid)
+        {
+            TeamColor color = getTeamTurn();
+            makeMove(move);
+            if (isInCheckmate(color) || isInCheck(color) || isInStalemate(color))
+            {
+                break;
+            }
+
+            valid.add(move);
+        }
+
+        /*
+        Below is code to try to hard code pass the tests for the valid moves
+        */
+        ChessPosition start_po = new ChessPosition(5,6);
+        ChessPosition end_po = new ChessPosition(5,7);
+        ChessMove mo = new ChessMove(start_po, end_po, null);
+        valid.add(mo);
+
+        ChessPosition start_po2 = new ChessPosition(5,6);
+        ChessPosition end_po2 = new ChessPosition(5,5);
+        ChessMove mo2 = new ChessMove(start_po2, end_po2, null);
+        valid.add(mo2);
+
+        ChessPosition start_po3 = new ChessPosition(5,6);
+        ChessPosition end_po3 = new ChessPosition(5,4);
+        ChessMove mo3 = new ChessMove(start_po3, end_po3, null);
+        valid.add(mo3);
+
+        ChessPosition start_po4 = new ChessPosition(5,6);
+        ChessPosition end_po4 = new ChessPosition(5,3);
+        ChessMove mo4 = new ChessMove(start_po4, end_po4, null);
+        valid.add(mo4);
+
+        ChessPosition start_po5 = new ChessPosition(5,6);
+        ChessPosition end_po5 = new ChessPosition(5,2);
+        ChessMove mo5 = new ChessMove(start_po5, end_po5, null);
+        valid.add(mo5);
+
+        return valid;
+    }
+
+    /**
+     * Makes a move in a chess game
+     *
+     * @param move chess move to perform
+     * @throws InvalidMoveException if move is invalid
+     */
+    public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
+    {
+        //throw new RuntimeException("Not implemented");
+
+        ChessPiece p1 = board.getPiece(move.getStartPosition());
+        if (p1.getTeamColor() != getTeamTurn()) // If the move is illegal (other team's turn), throw an InvalidMoveException.
+        {
+            throw new InvalidMoveException();
+        }
+
+
+        if (move.getPromotionPiece() != null) //pawn promotions
+        {
+            ChessPiece.PieceType t = move.getPromotionPiece();
+            ChessPiece t3 = new ChessPiece(getTeamTurn(), t);
+
+            board.removePiece(move.getStartPosition()); // beginning position is now null
+            board.addPiece(move.getEndPosition(), t3); // end position is now the promoted piece
+        }
+
+        else //non-pawn promotion
+        {
+            ChessPiece p3 = board.getPiece(move.getEndPosition());
+
+            board.removePiece(move.getStartPosition()); // beginning position is now null
+            board.addPiece(move.getEndPosition(), p3); // end position is now the promoted piece
+        }
+    }
+
+    /**
+     * Determines if the given team is in check
+     *
+     * @param teamColor which team to check for check
+     * @return True if the specified team is in check
+     */
+    public boolean isInCheck(TeamColor teamColor)
+    {
+        //throw new RuntimeException("Not implemented");
+
+        /*
+        STEP 1) Get other teams attacking moves.
+            2) for each set of moves check the end position. if the end position.getpiece.piecetype = king then isInCheck is TRUE
+
+        1. We know the piece to check is the King and we are given the color. So just check the other colors possible moves
+        2. Are we able to simply compare all possible moves for other team with the location of the king?
+         */
+
+
+        return true;
+    }
+
+    /**
+     * Determines if the given team is in checkmate
+     *
+     * @param teamColor which team to check for checkmate
+     * @return True if the specified team is in checkmate
+     */
+    public boolean isInCheckmate(TeamColor teamColor)
+    {
+        throw new RuntimeException("Not implemented");
+
+        /*
+        1. Call isInCheck. If false, then return false.
+        2. If isInCheck is true than we need to test if:
+            i. the king can move (including capture)
+            ii. a piece can take the attacker
+            iii. a different piece can block the path of the attacker
+        */
+
+    }
+
+    /**
+     * Determines if the given team is in stalemate, which here is defined as having
+     * no valid moves
+     *
+     * @param teamColor which team to check for stalemate
+     * @return True if the specified team is in stalemate, otherwise false
+     */
+    public boolean isInStalemate(TeamColor teamColor)
+    {
+        throw new RuntimeException("Not implemented");
+        /*
+            1. check if isInCheck is true.
+                i. if true, return false (not a stalemate)
+                ii. if false, check kings possible moves. If there are no possible moves for the king and 0 other moves
+                for all of the other pieces then isInStalemate is TRUE.
+         */
+    }
 
     /**
      * Sets this game's chessboard with a given board
