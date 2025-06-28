@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import static chess.ChessPiece.PieceType.KING;
+
 /**
  * For a class that can manage a chess game, making moves on a board
  * <p>
@@ -14,7 +16,6 @@ public class ChessGame
 {
     private TeamColor team;
     private ChessBoard board;
-    private int counter = 2;
 
     public ChessGame() {}
 
@@ -42,15 +43,9 @@ public class ChessGame
     /**
      * @return Which team's turn it is
      */
-    public TeamColor getTeamTurn() //is this where we toggle the team turn? Do I need an overarching class the says resetboard and start the game and switches the team color after each move?
+    public TeamColor getTeamTurn()
     {
-        if (counter % 2 == 0)
-        {
-            counter++;
-            return TeamColor.WHITE;
-        }
-        counter++;
-        return TeamColor.BLACK;
+        return this.team;
     }
 
     /**
@@ -82,7 +77,6 @@ public class ChessGame
     {
         ArrayList<ChessMove> valid = new ArrayList<>();
 
-        ChessPosition pos = new ChessPosition(startPosition.getRow(), startPosition.getColumn());
         ChessBoard board = getBoard();
 
         if (board.getPiece(startPosition) == null) // If no piece at startPosition, return null.
@@ -90,47 +84,19 @@ public class ChessGame
             return valid; //at this point valid should still be empty
         }
 
-        ChessPiece pie = board.getPiece(pos);
+        ChessPiece pie = board.getPiece(startPosition);
         ArrayList<ChessMove> unfilteredMoves = new ArrayList<>();
-        unfilteredMoves = (ArrayList<ChessMove>) pie.pieceMoves(board, pos);
+        unfilteredMoves = (ArrayList<ChessMove>) pie.pieceMoves(board, startPosition);
+        TeamColor color = getTeamTurn();
 
         for (ChessMove move : unfilteredMoves)
         {
-            TeamColor color = getTeamTurn();
             makeMove(move);
-            if (!isInCheckmate(color) && !isInCheck(color) && !isInStalemate(color))
+            if (!isInCheck(color) && !isInStalemate(color)) //double check stalemate here...
             {
                 valid.add(move);
             }
         }
-
-        /*
-        Below is hard code to use for testing
-        */
-//        ChessPosition start_po = new ChessPosition(5,6);
-//        ChessPosition end_po = new ChessPosition(5,7);
-//        ChessMove mo = new ChessMove(start_po, end_po, null);
-//        valid.add(mo);
-//
-//        ChessPosition start_po2 = new ChessPosition(5,6);
-//        ChessPosition end_po2 = new ChessPosition(5,5);
-//        ChessMove mo2 = new ChessMove(start_po2, end_po2, null);
-//        valid.add(mo2);
-//
-//        ChessPosition start_po3 = new ChessPosition(5,6);
-//        ChessPosition end_po3 = new ChessPosition(5,4);
-//        ChessMove mo3 = new ChessMove(start_po3, end_po3, null);
-//        valid.add(mo3);
-//
-//        ChessPosition start_po4 = new ChessPosition(5,6);
-//        ChessPosition end_po4 = new ChessPosition(5,3);
-//        ChessMove mo4 = new ChessMove(start_po4, end_po4, null);
-//        valid.add(mo4);
-//
-//        ChessPosition start_po5 = new ChessPosition(5,6);
-//        ChessPosition end_po5 = new ChessPosition(5,2);
-//        ChessMove mo5 = new ChessMove(start_po5, end_po5, null);
-//        valid.add(mo5);
 
         return valid;
     }
@@ -143,8 +109,6 @@ public class ChessGame
      */
     public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
-        //throw new RuntimeException("Not implemented");
-
         ChessPiece p1 = board.getPiece(move.getStartPosition());
         if (p1.getTeamColor() != getTeamTurn()) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
         {
@@ -186,27 +150,40 @@ public class ChessGame
             TeamColor t = TeamColor.WHITE;
         }
 
+
         ChessBoard board = getBoard();
 
-        for (ChessPiece piece : board) //how do I check the moves of every piece?
+        for (int i = 1; i < 9; i++)
         {
-            if (piece.getTeamColor() != teamColor)
+            for (int j = 1; j < 9; j++)
             {
+                ChessPosition pos = new ChessPosition(i, j);
+                ChessPiece piece = board.getPiece(pos);
 
-                ArrayList<ChessMove> oppositeColorMoves = new ArrayList<>();
+                if (piece.getTeamColor() == teamColor && piece.getPieceType() == KING)
+                {
+                    ChessPosition kingPosition = new ChessPosition(i, j);
+                }
 
-                oppositeColorMoves = (ArrayList<ChessMove>) piece.pieceMoves(board, );
+                else if (piece.getTeamColor() != teamColor)
+                {
+                    ArrayList<ChessMove> moveski = new ArrayList<>();
+                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
+                    for (ChessMove move : moveski)
+                    {
+                        ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
+                        if (pos2 == kingPosition)
+                        {
+                            return true;
+                        }
+                    }
 
+                }
+                return false;
             }
         }
-
         return false;
 
-
-        /*
-            1) Get other teams attacking moves.
-            2) for each piece's moves check the end position. If the end position.getpiece.piecetype = king and the king's color is the opposite then isInCheck is TRUE
-         */
     }
 
     /**
@@ -228,8 +205,8 @@ public class ChessGame
         2. Get all possible moves for teamColor
         3. for move : allmoves
             i. make the move
-            ii. is in check?
-            iii. if no
+            ii. is in check? no -> false;
+            iii. if true
                 1. make that move
                     i. double check you aren't in check now in a different way
                     ii. if you are not than you can return false.
@@ -255,10 +232,43 @@ public class ChessGame
      */
     public boolean isInStalemate(TeamColor teamColor)
     {
-        if (isInCheck(teamColor))
+        if (isInCheck(teamColor) || isInCheckmate(teamColor))
         {
             return false;
         }
+//
+//        ChessBoard board = getBoard();
+//
+//        for (int i = 1; i < 9; i++)
+//        {
+//            for (int j = 1; j < 9; j++)
+//            {
+//                ChessPosition pos = new ChessPosition(i, j);
+//                ChessPiece piece = board.getPiece(pos);
+//
+//                if (piece.getTeamColor() == teamColor && piece.getPieceType() == KING)
+//                {
+//                    ChessPosition kingPosition = new ChessPosition(i, j);
+//                }
+//
+//                else if (piece.getTeamColor() != teamColor)
+//                {
+//                    ArrayList<ChessMove> moveski = new ArrayList<>();
+//                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
+//                    for (ChessMove move : moveski)
+//                    {
+//                        ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
+//                        if (pos2 == kingPosition)
+//                        {
+//                            return true;
+//                        }
+//                    }
+//
+//                }
+//                return false;
+//            }
+//        }
+
 
         /*
             1. For each piece on board
@@ -267,6 +277,7 @@ public class ChessGame
                         1. if there are no possible moves, return true.
                         2. else return false.
          */
+        return false;
     }
 
     /**
