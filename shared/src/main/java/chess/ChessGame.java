@@ -91,8 +91,8 @@ public class ChessGame
 
         for (ChessMove move : unfilteredMoves)
         {
-            makeMove(move);
-            if (!isInCheck(color) && !isInStalemate(color)) //double check stalemate here...
+            makeMove(move); //need to replace this. HERERERERERERERERERERERERERERERERERERERERERERERERER
+            if (!isInCheck(color))
             {
                 valid.add(move);
             }
@@ -110,6 +110,9 @@ public class ChessGame
     public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
         ChessPiece p1 = board.getPiece(move.getStartPosition());
+        ChessPosition startPosition = move.getStartPosition();
+        validMoves(startPosition);
+
         if (p1.getTeamColor() != getTeamTurn()) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
         {
             throw new InvalidMoveException();
@@ -131,8 +134,6 @@ public class ChessGame
             board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
         }
     }
-
-    //public ChessPosition findTheKing()
 
     /**
      * Determines if the given team is in check
