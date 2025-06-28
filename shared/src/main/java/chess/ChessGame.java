@@ -91,11 +91,21 @@ public class ChessGame
 
         for (ChessMove move : unfilteredMoves)
         {
-            makeMove(move); //need to replace this. HERERERERERERERERERERERERERERERERERERERERERERERERER
+            board.removePiece(move.getStartPosition()); // beginning position is now null
+
+            if (move.getPromotionPiece() != null)
+            {
+                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
+            }
+            board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+
             if (!isInCheck(color))
             {
-                valid.add(move);
+                valid.add(move); // after making the move, if the team is not in check then add the move to the filtered "valid" array
             }
+
+            board.addPiece(startPosition, board.getPiece(startPosition)); //undo the move
+            board.removePiece(move.getEndPosition()); //undo the move
         }
 
         return valid;
@@ -110,28 +120,22 @@ public class ChessGame
     public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
         ChessPiece p1 = board.getPiece(move.getStartPosition());
-        ChessPosition startPosition = move.getStartPosition();
-        validMoves(startPosition);
 
         if (p1.getTeamColor() != getTeamTurn()) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
         {
             throw new InvalidMoveException();
         }
 
-
-        if (move.getPromotionPiece() != null) //pawn promotions
-        {
-            ChessPiece.PieceType t = move.getPromotionPiece();
-            ChessPiece t3 = new ChessPiece(getTeamTurn(), t);
-
-            board.removePiece(move.getStartPosition()); // beginning position is now null
-            board.addPiece(move.getEndPosition(), t3); // end position is now the promoted piece
-        }
-
-        else //non-pawn promotion
+        ChessPosition startPosition = move.getStartPosition();
+        if (validMoves(startPosition) != null)
         {
             board.removePiece(move.getStartPosition()); // beginning position is now null
-            board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
+
+            if (move.getPromotionPiece() != null)
+            {
+                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
+            }
+            board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
         }
     }
 
@@ -216,7 +220,7 @@ public class ChessGame
      * @param teamColor which team to check for stalemate
      * @return True if the specified team is in stalemate, otherwise false
      */
-    public boolean isInStalemate(TeamColor teamColor)
+    public boolean isInStalemate(TeamColor teamColor) throws InvalidMoveException
     {
         if (isInCheck(teamColor) || isInCheckmate(teamColor))
         {
