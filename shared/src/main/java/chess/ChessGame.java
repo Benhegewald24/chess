@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 import static chess.ChessPiece.PieceType.KING;
+import static chess.ChessPiece.PieceType.PAWN;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -92,11 +93,6 @@ public class ChessGame
         for (ChessMove move : unfilteredMoves)
         {
             board.removePiece(move.getStartPosition()); // beginning position is now null
-
-            if (move.getPromotionPiece() != null)
-            {
-                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
-            }
             board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
 
             if (!isInCheck(color))
@@ -136,6 +132,22 @@ public class ChessGame
                 board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
             }
             board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+        }
+    }
+
+    public void undoMakeMove(ChessMove move)
+    {
+        board.removePiece(move.getEndPosition());
+
+        if (move.getPromotionPiece() != null)
+        {
+            ChessPiece peace = new ChessPiece(board.getPiece(move.getStartPosition()).getTeamColor(), PAWN);
+            board.addPiece(move.getStartPosition(), peace);
+        }
+
+        else
+        {
+            board.addPiece(move.getStartPosition(), board.getPiece(move.getEndPosition()));
         }
     }
 
@@ -184,33 +196,41 @@ public class ChessGame
      */
     public boolean isInCheckmate(TeamColor teamColor) throws InvalidMoveException
     {
-        if (!isInCheck(team))
+        if (!isInCheck(teamColor))
         {
             return false;
         }
 
-        /*
+        else
+        {
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+                    ChessPosition pos = new ChessPosition(i, j);
+                    ChessPiece piece = board.getPiece(pos);
 
-        1. Is the king in check?
-        2. Get all possible moves for teamColor
-        3. for move : allmoves
-            i. make the move
-            ii. is in check? no -> false;
-            iii. if true
-                1. make that move
-                    i. double check you aren't in check now in a different way
-                    ii. if you are not than you can return false.
-                    iii. if you are then continue;
-         4. return false;
+                    if (piece.getTeamColor() == teamColor)
+                    {
+                        ArrayList<ChessMove> moveski = new ArrayList<>();
+                        ChessGame gm1 = new ChessGame();
+                        moveski = (ArrayList<ChessMove>) gm1.validMoves(pos);
 
-
-
-        3 Options when you are in check:
-            i. the king can move (including capture)
-            ii. a piece can take the attacker
-            iii. a different piece can block the path of the attacker
-        */
-    return false;
+                        for (ChessMove move : moveski)
+                        {
+                            makeMove(move);
+                            if (!isInCheck(teamColor))
+                            {
+                                undoMakeMove(move);
+                                return false;
+                            }
+                            undoMakeMove(move);
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -227,48 +247,29 @@ public class ChessGame
             return false;
         }
 
-//
-//        ChessBoard board = getBoard();
-//
-//        for (int i = 1; i < 9; i++)
-//        {
-//            for (int j = 1; j < 9; j++)
-//            {
-//                ChessPosition pos = new ChessPosition(i, j);
-//                ChessPiece piece = board.getPiece(pos);
-//
-//                if (piece.getTeamColor() == teamColor && piece.getPieceType() == KING)
-//                {
-//                    ChessPosition kingPosition = new ChessPosition(i, j);
-//                }
-//
-//                else if (piece.getTeamColor() != teamColor)
-//                {
-//                    ArrayList<ChessMove> moveski = new ArrayList<>();
-//                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
-//                    for (ChessMove move : moveski)
-//                    {
-//                        ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
-//                        if (pos2 == kingPosition)
-//                        {
-//                            return true;
-//                        }
-//                    }
-//
-//                }
-//                return false;
-//            }
-//        }
+        ChessBoard board = getBoard();
 
+        for (int i = 1; i < 9; i++)
+        {
+            for (int j = 1; j < 9; j++)
+            {
+                ChessPosition pos = new ChessPosition(i, j);
+                ChessPiece piece = board.getPiece(pos);
 
-        /*
-            1. For each piece on board
-                i. if piece.getcolor = teamcolor
-                    i. get piece's moves
-                        1. if there are no possible moves, return true.
-                        2. else return false.
-         */
-        return false;
+                if (piece.getTeamColor() == teamColor)
+                {
+                    ArrayList<ChessMove> moveski = new ArrayList<>();
+                    ChessGame gm1 = new ChessGame();
+                    moveski = (ArrayList<ChessMove>) gm1.validMoves(pos);
+
+                    if (!moveski.isEmpty())
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
