@@ -93,7 +93,16 @@ public class ChessGame
         for (ChessMove move : unfilteredMoves)
         {
             board.removePiece(move.getStartPosition()); // beginning position is now null
-            board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+            if (move.getPromotionPiece() == null)
+            {
+                board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+            }
+
+            //code below is to handle pawns where the startPosition pieceType != endPosition pieceType. I don't think it works
+            else
+            {
+                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position now has same piece as starting position
+            }
 
             if (!isInCheck(color))
             {
