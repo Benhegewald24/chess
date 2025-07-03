@@ -74,7 +74,7 @@ public class ChessGame
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException //this method should filter for moves that cannot be made because of check / checkmate
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) //this method should filter for moves that cannot be made because of check / checkmate
     {
         ArrayList<ChessMove> valid = new ArrayList<>();
 
@@ -166,7 +166,7 @@ public class ChessGame
      * @param teamColor which team to check for check
      * @return True if the specified team is in check
      */
-    public boolean isInCheck(TeamColor teamColor) throws InvalidMoveException
+    public boolean isInCheck(TeamColor teamColor)
     {
         ChessBoard board = getBoard();
 
@@ -180,13 +180,12 @@ public class ChessGame
                 if (piece.getTeamColor() != teamColor)
                     {
                         ArrayList<ChessMove> moveski = new ArrayList<>();
-                        ChessGame gm1 = new ChessGame();
-                        moveski = (ArrayList<ChessMove>) gm1.validMoves(pos);
+                        moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
                         for (ChessMove move : moveski)
                         {
                             ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
 
-                            if (board.getPiece(pos2).getPieceType() == KING && board.getPiece(pos2).getTeamColor() != teamColor)
+                            if (board.getPiece(pos2).getPieceType() == KING && board.getPiece(pos2).getTeamColor() == teamColor)
                             {
                                 return true;
                             }
@@ -203,7 +202,7 @@ public class ChessGame
      * @param teamColor which team to check for checkmate
      * @return True if the specified team is in checkmate
      */
-    public boolean isInCheckmate(TeamColor teamColor) throws InvalidMoveException
+    public boolean isInCheckmate(TeamColor teamColor)
     {
         if (!isInCheck(teamColor))
         {
@@ -223,11 +222,22 @@ public class ChessGame
                     {
                         ArrayList<ChessMove> moveski = new ArrayList<>();
                         ChessGame gm1 = new ChessGame();
-                        moveski = (ArrayList<ChessMove>) gm1.validMoves(pos);
+                        moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
 
                         for (ChessMove move : moveski)
                         {
-                            makeMove(move);
+                            board.removePiece(move.getStartPosition()); // beginning position is now null
+                            if (move.getPromotionPiece() == null)
+                            {
+                                board.addPiece(move.getEndPosition(), board.getPiece(move.getStartPosition())); // end position now has same piece as starting position
+                            }
+
+                            else
+                            {
+                                ChessPiece pie = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
+                                board.addPiece(move.getEndPosition(), pie); // end position now has same piece as starting position
+                            }
+
                             if (!isInCheck(teamColor))
                             {
                                 undoMakeMove(move);
@@ -249,7 +259,7 @@ public class ChessGame
      * @param teamColor which team to check for stalemate
      * @return True if the specified team is in stalemate, otherwise false
      */
-    public boolean isInStalemate(TeamColor teamColor) throws InvalidMoveException
+    public boolean isInStalemate(TeamColor teamColor)
     {
         if (isInCheck(teamColor) || isInCheckmate(teamColor))
         {
@@ -269,7 +279,7 @@ public class ChessGame
                 {
                     ArrayList<ChessMove> moveski = new ArrayList<>();
                     ChessGame gm1 = new ChessGame();
-                    moveski = (ArrayList<ChessMove>) gm1.validMoves(pos);
+                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
 
                     if (!moveski.isEmpty())
                     {
