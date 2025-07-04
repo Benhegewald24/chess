@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-import static chess.ChessPiece.PieceType.KING;
-import static chess.ChessPiece.PieceType.PAWN;
+import static chess.ChessPiece.PieceType.*;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -74,15 +73,15 @@ public class ChessGame
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) //this method should filter for moves that cannot be made because of check / checkmate
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) // should filter for moves that can't be made because of check / checkmate
     {
         ArrayList<ChessMove> valid = new ArrayList<>();
 
         ChessBoard board = getBoard();
 
-        if (board.getPiece(startPosition) == null) // If no piece at startPosition, return null.
+        if (board.getPiece(startPosition) == null)
         {
-            return valid; //at this point valid should still be empty
+            return valid;
         }
 
         ChessPiece pie = board.getPiece(startPosition);
@@ -92,16 +91,16 @@ public class ChessGame
 
         for (ChessMove move : unfilteredMoves)
         {
-            board.removePiece(move.getStartPosition()); // beginning position is now null
-            if (move.getPromotionPiece() == null)
+            board.removePiece(move.getStartPosition());
+            if (move.getPromotionPiece() == null) //not a pawn
             {
-                board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+                board.addPiece(move.getEndPosition(), board.getPiece(startPosition));
             }
 
-            //code below is to handle pawns where the startPosition pieceType != endPosition pieceType. I don't think it works
             else
             {
-                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position now has same piece as starting position
+                ChessPiece pie2 = new ChessPiece(pie.getTeamColor(), move.getPromotionPiece());
+                board.addPiece(move.getEndPosition(), pie2);
             }
 
             if (!isInCheck(color))
@@ -109,8 +108,8 @@ public class ChessGame
                 valid.add(move); // after making the move, if the team is not in check then add the move to the filtered "valid" array
             }
 
-            board.addPiece(startPosition, board.getPiece(startPosition)); //undo the move
-            board.removePiece(move.getEndPosition()); //undo the move
+            board.addPiece(startPosition, board.getPiece(startPosition)); //undo move
+            board.removePiece(move.getEndPosition()); //undo move
         }
 
         return valid;
@@ -137,31 +136,38 @@ public class ChessGame
         }
 
         ChessPosition startPosition = move.getStartPosition();
+
         if (validMoves(startPosition) != null)
         {
-            board.removePiece(move.getStartPosition()); // beginning position is now null
+            board.removePiece(move.getStartPosition());
 
             if (move.getPromotionPiece() != null)
             {
-                board.addPiece(move.getEndPosition(), board.getPiece(move.getEndPosition())); // end position is now the promoted piece
+                ChessPiece pie2 = new ChessPiece(p1.getTeamColor(), move.getPromotionPiece());
+                board.addPiece(move.getEndPosition(), pie2);
             }
-            board.addPiece(move.getEndPosition(), board.getPiece(startPosition)); // end position now has same piece as starting position
+
+            else
+            {
+                board.addPiece(move.getEndPosition(), board.getPiece(startPosition));
+            }
         }
     }
 
     public void undoMakeMove(ChessMove move)
     {
         board.removePiece(move.getEndPosition());
+        ChessPiece p1 = board.getPiece(move.getStartPosition());
 
-        if (move.getPromotionPiece() != null)
+        if (p1 != null && move.getPromotionPiece() != null)
         {
-            ChessPiece peace = new ChessPiece(board.getPiece(move.getStartPosition()).getTeamColor(), PAWN);
-            board.addPiece(move.getStartPosition(), peace);
+            ChessPiece pie2 = new ChessPiece(p1.getTeamColor(), move.getPromotionPiece());
+            board.addPiece(move.getEndPosition(), pie2);
         }
 
         else
         {
-            board.addPiece(move.getStartPosition(), board.getPiece(move.getEndPosition()));
+            board.addPiece(move.getStartPosition(), board.getPiece(move.getStartPosition()));
         }
     }
 
@@ -186,17 +192,17 @@ public class ChessGame
                     break;
                 }
 
-                ChessPiece piece = board.getPiece(pos);
+                ChessPiece pi = board.getPiece(pos);
 
-                if (piece == null)
+                if (pi == null)
                 {
                     continue;
                 }
 
-                if (piece.getTeamColor() != teamColor)
+                if (pi.getTeamColor() != teamColor)
                 {
                     ArrayList<ChessMove> moveski = new ArrayList<>();
-                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
+                    moveski = (ArrayList<ChessMove>) pi.pieceMoves(board, pos);
                     for (ChessMove move : moveski)
                     {
                         ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
@@ -235,7 +241,7 @@ public class ChessGame
                     ChessPosition pos = new ChessPosition(i, j);
                     ChessPiece piece = board.getPiece(pos);
 
-                    if (piece != null && piece.getTeamColor() == teamColor)
+                    if (piece != null && piece.getTeamColor() != teamColor)
                     {
                         ArrayList<ChessMove> moveski = new ArrayList<>();
                         moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
@@ -260,7 +266,11 @@ public class ChessGame
                                 undoMakeMove(move);
                                 return false;
                             }
-                            undoMakeMove(move);
+
+                            else
+                            {
+                                undoMakeMove(move);
+                            }
                         }
                     }
                 }
