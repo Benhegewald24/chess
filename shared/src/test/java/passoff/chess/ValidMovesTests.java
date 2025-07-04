@@ -155,7 +155,7 @@ public class ValidMovesTests
     }
 
     @Test
-    @DisplayName("Valid Moves Independent of Team Turn") // I have no idea. Has to be a black rook or queen with a white piece on [4, 5] or a black piece on [5, 5]. Also a black piece on [1, 5]/
+    @DisplayName("Valid Moves Independent of Team Turn") // I have no idea. Has to be a black rook or queen with a white piece on [4, 5] or a black piece on [5, 5]. Also a black piece on [1, 5]
     public void validMovesOtherTeam()
     {
         var game = new ChessGame();

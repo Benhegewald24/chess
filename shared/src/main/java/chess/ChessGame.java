@@ -77,8 +77,6 @@ public class ChessGame
     {
         ArrayList<ChessMove> valid = new ArrayList<>();
 
-        ChessBoard board = getBoard();
-
         if (board.getPiece(startPosition) == null)
         {
             return valid;
@@ -87,28 +85,28 @@ public class ChessGame
         ChessPiece pie = board.getPiece(startPosition);
         ArrayList<ChessMove> unfilteredMoves = new ArrayList<>();
         unfilteredMoves = (ArrayList<ChessMove>) pie.pieceMoves(board, startPosition);
-        TeamColor color = getTeamTurn();
 
         for (ChessMove move : unfilteredMoves)
         {
-            board.removePiece(move.getStartPosition());
             if (move.getPromotionPiece() == null) //not a pawn
             {
                 board.addPiece(move.getEndPosition(), board.getPiece(startPosition));
             }
 
-            else
+            else //pawn promote
             {
                 ChessPiece pie2 = new ChessPiece(pie.getTeamColor(), move.getPromotionPiece());
                 board.addPiece(move.getEndPosition(), pie2);
             }
 
-            if (!isInCheck(color))
+            board.removePiece(move.getStartPosition());
+
+            if (!isInCheck(pie.getTeamColor()))
             {
                 valid.add(move); // after making the move, if the team is not in check then add the move to the filtered "valid" array
             }
 
-            board.addPiece(startPosition, board.getPiece(startPosition)); //undo move
+            board.addPiece(startPosition, board.getPiece(move.getStartPosition())); //undo move
             board.removePiece(move.getEndPosition()); //undo move
         }
 
@@ -130,18 +128,18 @@ public class ChessGame
 
         ChessPiece p1 = board.getPiece(move.getStartPosition());
 
-        if (p1.getTeamColor() != getTeamTurn()) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
+        if (p1 != null && p1.getTeamColor() != getTeamTurn() || !validMoves(move.getStartPosition()).contains(move)) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
         {
             throw new InvalidMoveException();
         }
 
         ChessPosition startPosition = move.getStartPosition();
 
-        if (validMoves(startPosition) != null)
+        if (!validMoves(startPosition).isEmpty())
         {
             board.removePiece(move.getStartPosition());
 
-            if (move.getPromotionPiece() != null)
+            if (move.getPromotionPiece() != null) //pawn promote
             {
                 ChessPiece pie2 = new ChessPiece(p1.getTeamColor(), move.getPromotionPiece());
                 board.addPiece(move.getEndPosition(), pie2);
@@ -214,6 +212,22 @@ public class ChessGame
                         }
                     }
                 }
+
+//                if (pi.getPieceType() == KING)
+//                {
+//                    ArrayList<ChessMove> moveski2 = new ArrayList<>();
+//                    moveski2 = (ArrayList<ChessMove>) pi.pieceMoves(board, pos);
+//                    for (ChessMove move : moveski2)
+//                    {
+//                        ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
+//                        ChessPiece pie = board.getPiece(pos2);
+//
+//                        if (pie != null && pie.getPieceType() == KING && pie.getTeamColor() == teamColor)
+//                        {
+//                            return true;
+//                        }
+//                    }
+//                }
             }
         }
         return false;
@@ -250,12 +264,12 @@ public class ChessGame
                         {
                             board.removePiece(move.getStartPosition());
 
-                            if (move.getPromotionPiece() == null)
+                            if (move.getPromotionPiece() == null) //no pawn promotion
                             {
                                 board.addPiece(move.getEndPosition(), board.getPiece(move.getStartPosition()));
                             }
 
-                            else //Exception for pawns
+                            else //Pawn Promotion
                             {
                                 ChessPiece pie = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
                                 board.addPiece(move.getEndPosition(), pie);
