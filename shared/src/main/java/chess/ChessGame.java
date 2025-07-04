@@ -124,6 +124,11 @@ public class ChessGame
      */
     public void makeMove(ChessMove move) throws InvalidMoveException //deals with pawn promotions as well
     {
+        if (board == null)
+        {
+            return;
+        }
+
         ChessPiece p1 = board.getPiece(move.getStartPosition());
 
         if (p1.getTeamColor() != getTeamTurn()) // If given a move for the wrong team (not their turn), throw an InvalidMoveException.
@@ -175,24 +180,36 @@ public class ChessGame
             for (int j = 1; j < 9; j++)
             {
                 ChessPosition pos = new ChessPosition(i, j);
+
+                if (board == null)
+                {
+                    break;
+                }
+
                 ChessPiece piece = board.getPiece(pos);
 
-                if (piece.getTeamColor() != teamColor)
-                    {
-                        ArrayList<ChessMove> moveski = new ArrayList<>();
-                        moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
-                        for (ChessMove move : moveski)
-                        {
-                            ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
+                if (piece == null)
+                {
+                    continue;
+                }
 
-                            if (board.getPiece(pos2).getPieceType() == KING && board.getPiece(pos2).getTeamColor() == teamColor)
-                            {
-                                return true;
-                            }
+                if (piece.getTeamColor() != teamColor)
+                {
+                    ArrayList<ChessMove> moveski = new ArrayList<>();
+                    moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
+                    for (ChessMove move : moveski)
+                    {
+                        ChessPosition pos2 = new ChessPosition(move.getEndPosition().getRow(), move.getEndPosition().getColumn());
+                        ChessPiece pie = board.getPiece(pos2);
+
+                        if (pie != null && pie.getPieceType() == KING && pie.getTeamColor() == teamColor)
+                        {
+                            return true;
                         }
                     }
                 }
             }
+        }
         return false;
     }
 
@@ -218,24 +235,24 @@ public class ChessGame
                     ChessPosition pos = new ChessPosition(i, j);
                     ChessPiece piece = board.getPiece(pos);
 
-                    if (piece.getTeamColor() == teamColor)
+                    if (piece != null && piece.getTeamColor() == teamColor)
                     {
                         ArrayList<ChessMove> moveski = new ArrayList<>();
-                        ChessGame gm1 = new ChessGame();
                         moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
 
                         for (ChessMove move : moveski)
                         {
-                            board.removePiece(move.getStartPosition()); // beginning position is now null
+                            board.removePiece(move.getStartPosition());
+
                             if (move.getPromotionPiece() == null)
                             {
-                                board.addPiece(move.getEndPosition(), board.getPiece(move.getStartPosition())); // end position now has same piece as starting position
+                                board.addPiece(move.getEndPosition(), board.getPiece(move.getStartPosition()));
                             }
 
-                            else
+                            else //Exception for pawns
                             {
                                 ChessPiece pie = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
-                                board.addPiece(move.getEndPosition(), pie); // end position now has same piece as starting position
+                                board.addPiece(move.getEndPosition(), pie);
                             }
 
                             if (!isInCheck(teamColor))
@@ -275,10 +292,9 @@ public class ChessGame
                 ChessPosition pos = new ChessPosition(i, j);
                 ChessPiece piece = board.getPiece(pos);
 
-                if (piece.getTeamColor() == teamColor)
+                if (piece != null && piece.getTeamColor() == teamColor)
                 {
                     ArrayList<ChessMove> moveski = new ArrayList<>();
-                    ChessGame gm1 = new ChessGame();
                     moveski = (ArrayList<ChessMove>) piece.pieceMoves(board, pos);
 
                     if (!moveski.isEmpty())
